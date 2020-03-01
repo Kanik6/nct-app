@@ -45,21 +45,19 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter
                 .antMatchers("/getUser/{user_id}").permitAll()
                 .antMatchers(HttpMethod.POST,"/createUser").permitAll();
 
-//                .antMatchers("/getStaff", "/createStaff").hasRole("admin")
-////                .antMatchers(HttpMethod.POST,"/createStaff").hasRole("ADMIN")
-//                .antMatchers("/getUser").hasRole("EDITOR")
-//                .and().formLogin()
-//                .and()
-//                .httpBasic();
-
         List<View> views = viewRepository.findAll();
 
         for (View v : views)
         {
             List<String> roles = new ArrayList<>();
+
             v.getRoles().stream().forEach(r -> roles.add(r.getName()));
+
             HttpMethod method = HttpMethod.valueOf(v.getMethod());
             registry.regexMatchers(method,v.getViewName()).hasAnyRole(roles.toArray(new String[roles.size()]));
+            //---------------------------------------
+            roles.forEach(e -> System.out.println(e));
+            System.out.println(v.getViewName());
         }
 
         registry.anyRequest()

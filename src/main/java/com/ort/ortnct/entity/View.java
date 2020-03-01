@@ -27,6 +27,10 @@ public class View
             inverseJoinColumns = @JoinColumn(name = "role_id"))
     private Set<Role> roles;
 
+    public View()
+    {
+    }
+
     public View(String viewName, String method, String viewTitle, Set<Role> roles)
     {
         this.viewName = viewName;
