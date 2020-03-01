@@ -19,7 +19,8 @@ public class Staff
 
     @Column(name = "staff_id")
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @SequenceGenerator(name = "mySeqGenStaff", sequenceName = "mySeqStaff", initialValue = 3, allocationSize = 1)
+    @GeneratedValue(generator = "mySeqGenStaff")
     private Long id;
 
     @Column(name = "first_name")

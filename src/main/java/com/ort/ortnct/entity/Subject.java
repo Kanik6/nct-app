@@ -1,6 +1,7 @@
 package com.ort.ortnct.entity;
 
 
+import com.ort.ortnct.TestType;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiModel;
 
@@ -25,6 +26,10 @@ public class Subject
 
     @OneToOne(mappedBy = "subject")
     private Test test;
+
+    @Column(name = "test_type")
+    @Enumerated(EnumType.STRING)
+    private TestType testType;
 
     public Subject()
     {

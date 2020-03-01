@@ -63,8 +63,6 @@ public class StaffService implements UserDetailsService
 
         staff.getRoles().stream().forEach(r -> roles.add(r.getName()));
 
-        roles.forEach(e -> System.out.println(e));
-
         return User
                 .withUsername(staff.getFirstName())
                 .password(passwordEncoder.encode(staff.getPassword()))

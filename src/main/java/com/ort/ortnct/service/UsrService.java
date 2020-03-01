@@ -13,10 +13,6 @@ public class UsrService
 
     public Usr createUser(Usr usr)
     {
-//        Usr usrFromDB = usrRepository.findById(usr.getId()).orElse(null);
-//        if(usrFromDB != null)
-//            return usrFromDB;
-
        return usrRepository.save(usr);
     }
 
