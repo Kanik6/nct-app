@@ -1,5 +1,7 @@
 package com.ort.ortnct.entity;
 
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiModel;
 import org.springframework.context.annotation.EnableMBeanExport;
 import org.springframework.web.bind.annotation.CrossOrigin;
 
@@ -8,6 +10,7 @@ import java.util.List;
 
 @Entity
 @Table(name = "categories")
+@ApiModel(value = "category model")
 public class Category
 {
     @Column(name = "category_id")

@@ -1,10 +1,14 @@
 package com.ort.ortnct.entity;
 
 
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiModel;
+
 import javax.persistence.*;
 
 @Entity
 @Table(name = "sub_categories")
+@ApiModel(value = "sub category model")
 public class SubCategory
 {
     @Column(name = "sub_category_id")

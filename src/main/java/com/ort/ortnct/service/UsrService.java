@@ -20,8 +20,8 @@ public class UsrService
        return usrRepository.save(usr);
     }
 
-    public Usr getUsr(String user_id)
+    public Boolean getUsr(String user_id)
     {
-        return usrRepository.findById(user_id).orElse(null);
+        return usrRepository.findById(user_id).isPresent();
     }
 }

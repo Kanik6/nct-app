@@ -1,9 +1,13 @@
 package com.ort.ortnct.entity;
 
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiModel;
+
 import javax.persistence.*;
 
 @Entity
 @Table(name = "roles")
+@ApiModel(value = "role model")
 public class Role
 {
     @Id

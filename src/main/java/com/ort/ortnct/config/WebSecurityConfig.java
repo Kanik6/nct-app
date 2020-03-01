@@ -43,7 +43,13 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter
                  http.csrf().disable()
                 .authorizeRequests()
                 .antMatchers("/getUser/{user_id}").permitAll()
-                .antMatchers(HttpMethod.POST,"/createUser").permitAll();
+                .antMatchers("/v2/api-docs",
+                        "/configuration/ui",
+                        "/swagger-resources/**",
+                        "/configuration/security",
+                        "/swagger-ui.html",
+                        "/webjars/**").permitAll()
+                 .antMatchers(HttpMethod.POST,"/createUser").permitAll();
 
         List<View> views = viewRepository.findAll();
 
@@ -56,8 +62,6 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter
             HttpMethod method = HttpMethod.valueOf(v.getMethod());
             registry.regexMatchers(method,v.getViewName()).hasAnyRole(roles.toArray(new String[roles.size()]));
             //---------------------------------------
-            roles.forEach(e -> System.out.println(e));
-            System.out.println(v.getViewName());
         }
 
         registry.anyRequest()

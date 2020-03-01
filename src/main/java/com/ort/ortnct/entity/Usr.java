@@ -1,5 +1,7 @@
 package com.ort.ortnct.entity;
 
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiModel;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.persistence.*;
@@ -8,6 +10,7 @@ import java.util.Set;
 
 @Entity
 @Table(name = "usr")
+@ApiModel(value = "user model")
 public class Usr
 {
     @Column(name = "usr_id", nullable = false, unique = true)

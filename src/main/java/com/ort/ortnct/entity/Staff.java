@@ -2,6 +2,9 @@ package com.ort.ortnct.entity;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
@@ -10,6 +13,7 @@ import java.util.Set;
 
 @Entity
 @Table(name = "staff")
+@ApiModel(value = "staff model")
 public class Staff
 {
 
@@ -44,12 +48,15 @@ public class Staff
     private String password;
 
     @Column(name = "position")
+    @ApiModelProperty(notes = "position of the staff , ADMIN or EDITOR")
     private String position;
 
     @JsonIgnore
     @Column(name = "related_category")
+    @ApiModelProperty(notes = "related category ORT or NCT")
     private String relatedCategory;
 
+    @JsonIgnore
     @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(name = "staff_roles",
             joinColumns = @JoinColumn(name = "staff_id"),
@@ -60,7 +67,7 @@ public class Staff
     {
     }
 
-    public Staff(String firstName, String lastName, LocalDate birthDate, Boolean isMale, String phoneNumber, String email, String login, String password, String position, String relatedCategory, Set<Role> roles)
+    public Staff(String firstName, String lastName, LocalDate birthDate, Boolean isMale, String phoneNumber, String email, String login, String password, String position)
     {
         this.firstName = firstName;
         this.lastName = lastName;
@@ -71,8 +78,6 @@ public class Staff
         this.login = login;
         this.password = password;
         this.position = position;
-        this.relatedCategory = relatedCategory;
-        this.roles = roles;
     }
 
     public Long getId()

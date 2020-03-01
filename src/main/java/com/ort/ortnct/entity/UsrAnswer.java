@@ -1,10 +1,14 @@
 package com.ort.ortnct.entity;
 
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiModel;
+
 import javax.persistence.*;
 import java.util.List;
 
 @Entity
 @Table(name = "usr_answers")
+@ApiModel(value = "user answer model")
 public class UsrAnswer
 {
     @Column(name = "usr_answer_id")
@@ -22,15 +26,9 @@ public class UsrAnswer
             joinColumns = @JoinColumn(name = "usr_answer_id"))
     private Usr usrr;
 
-    @Column(name = "us_id")
-    private String usrId;
-
     @OneToOne
     @JoinColumn(name = "test_id")
     private Test test;
-
-    @Column(name = "tes_id")
-    private Long testId;
 
     @OneToOne
     @JoinColumn(name = "answer_id")
@@ -43,12 +41,12 @@ public class UsrAnswer
     {
     }
 
-    public UsrAnswer(String usrId, Long testId, Long answerId, Usr usrr)
+    public UsrAnswer(Usr usr, Usr usrr, Test test, Answer answer)
     {
-        this.usrId = usrId;
-        this.testId = testId;
-        this.answerId = answerId;
+        this.usr = usr;
         this.usrr = usrr;
+        this.test = test;
+        this.answer = answer;
     }
 
     public Long getId()
@@ -66,16 +64,6 @@ public class UsrAnswer
         this.usr = usr;
     }
 
-    public String getUsrId()
-    {
-        return usrId;
-    }
-
-    public void setUsrId(String usrId)
-    {
-        this.usrId = usrId;
-    }
-
     public Test getTest()
     {
         return test;
@@ -84,16 +72,6 @@ public class UsrAnswer
     public void setTest(Test test)
     {
         this.test = test;
-    }
-
-    public Long getTestId()
-    {
-        return testId;
-    }
-
-    public void setTestId(Long testId)
-    {
-        this.testId = testId;
     }
 
     public Answer getAnswer()
@@ -122,9 +100,8 @@ public class UsrAnswer
         return "UsrAnswer{" +
                 "id=" + id +
                 ", usr=" + usr +
-                ", usrId=" + usrId +
+                ", usrr=" + usrr +
                 ", test=" + test +
-                ", testId=" + testId +
                 ", answer=" + answer +
                 ", answerId=" + answerId +
                 '}';

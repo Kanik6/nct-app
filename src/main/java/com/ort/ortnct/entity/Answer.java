@@ -1,11 +1,12 @@
 package com.ort.ortnct.entity;
 
-import com.sun.org.apache.xpath.internal.operations.Bool;
+import io.swagger.annotations.ApiModel;
 
 import javax.persistence.*;
 
 @Entity
 @Table(name = "answers")
+@ApiModel(value = "answer model")
 public class Answer
 {
     @Column(name = "answer_id")

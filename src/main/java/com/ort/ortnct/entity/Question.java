@@ -1,10 +1,14 @@
 package com.ort.ortnct.entity;
 
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiModel;
+
 import javax.persistence.*;
 import java.util.List;
 
 @Entity
 @Table(name = "questions")
+@ApiModel(value = "question model")
 public class Question
 {
     @Column(name = "question_id")

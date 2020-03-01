@@ -1,9 +1,13 @@
 package com.ort.ortnct.entity;
 
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiModel;
+
 import javax.persistence.*;
 
 @Entity
 @Table(name = "test_result")
+@ApiModel(value = "test result model")
 public class TestResult
 {
     @Column(name = "test_result_id")
@@ -22,9 +26,6 @@ public class TestResult
     @JoinColumn(name = "test_id")
     private Test test;
 
-    @Column(name = "tes_id")
-    private Long testId;
-
     @Column(name = "correct")
     private Long correct;
 
@@ -35,10 +36,9 @@ public class TestResult
     {
     }
 
-    public TestResult(String usrId, Long testId, Long correct, Long inCorrect)
+    public TestResult(String usrId, Long correct, Long inCorrect)
     {
         this.usrId = usrId;
-        this.testId = testId;
         this.correct = correct;
         this.inCorrect = inCorrect;
     }
@@ -78,16 +78,6 @@ public class TestResult
         this.test = test;
     }
 
-    public Long getTestId()
-    {
-        return testId;
-    }
-
-    public void setTestId(Long testId)
-    {
-        this.testId = testId;
-    }
-
     public Long getCorrect()
     {
         return correct;
@@ -113,8 +103,9 @@ public class TestResult
     {
         return "TestResult{" +
                 "id=" + id +
-                ", usrId=" + usrId +
-                ", testId=" + testId +
+                ", usr=" + usr +
+                ", usrId='" + usrId + '\'' +
+                ", test=" + test +
                 ", correct=" + correct +
                 ", inCorrect=" + inCorrect +
                 '}';
