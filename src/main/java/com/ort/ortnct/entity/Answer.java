@@ -30,11 +30,10 @@ public class Answer
     {
     }
 
-    public Answer(String answer, Boolean isCorrect, Question question)
+    public Answer(String answer, Boolean isCorrect)
     {
         this.answer = answer;
         this.isCorrect = isCorrect;
-        this.question = question;
     }
 
     public Long getId()

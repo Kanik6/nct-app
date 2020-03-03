@@ -1,8 +1,7 @@
 package com.ort.ortnct.entity;
 
 
-import com.ort.ortnct.TestType;
-import io.swagger.annotations.Api;
+import com.ort.ortnct.enums.TestType;
 import io.swagger.annotations.ApiModel;
 
 import javax.persistence.*;
@@ -20,8 +19,10 @@ public class Subject
     @Column(name = "subject_name")
     private String name;
 
-    @OneToOne
-    @JoinColumn(name = "sub_category_id")
+    @ManyToOne
+    @JoinTable(name = "subject_sub_category",
+            joinColumns = @JoinColumn(name = "subject_id"),
+            inverseJoinColumns = @JoinColumn(name = "sub_category_id"))
     private SubCategory subCategory;
 
     @OneToOne(mappedBy = "subject")
@@ -35,11 +36,10 @@ public class Subject
     {
     }
 
-    public Subject(String name, SubCategory subCategory, Test test)
+    public Subject(String name, SubCategory subCategory)
     {
         this.name = name;
         this.subCategory = subCategory;
-        this.test = test;
     }
 
     public Long getId()
@@ -77,6 +77,16 @@ public class Subject
         this.test = test;
     }
 
+    public TestType getTestType()
+    {
+        return testType;
+    }
+
+    public void setTestType(TestType testType)
+    {
+        this.testType = testType;
+    }
+
     @Override
     public String toString()
     {
@@ -85,6 +95,7 @@ public class Subject
                 ", name='" + name + '\'' +
                 ", subCategory=" + subCategory +
                 ", test=" + test +
+                ", testType=" + testType +
                 '}';
     }
 }

@@ -33,11 +33,9 @@ public class Question
     {
     }
 
-    public Question(String question, Test test, List<Answer> answer)
+    public Question(String question)
     {
         this.question = question;
-        this.test = test;
-        this.answer = answer;
     }
 
     public Long getId()

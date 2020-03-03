@@ -56,7 +56,7 @@ public class StaffService implements UserDetailsService
     @Override
     public UserDetails loadUserByUsername(String s) throws UsernameNotFoundException
     {
-        Staff staff = staffRepository.findByFirstName(s).orElseThrow(() -> new UsernameNotFoundException("User was not found!"));
+        Staff staff = staffRepository.findByLogin(s).orElseThrow(() -> new UsernameNotFoundException("User was not found!"));
 
 
         List<String> roles = new ArrayList<>();
@@ -64,7 +64,7 @@ public class StaffService implements UserDetailsService
         staff.getRoles().stream().forEach(r -> roles.add(r.getName()));
 
         return User
-                .withUsername(staff.getFirstName())
+                .withUsername(staff.getLogin())
                 .password(passwordEncoder.encode(staff.getPassword()))
                 .roles(roles.toArray(new String[roles.size()]))
                 .build();

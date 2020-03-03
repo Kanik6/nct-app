@@ -1,4 +1,4 @@
-package com.ort.ortnct;
+package com.ort.ortnct.enums;
 
 public enum TestType
 {

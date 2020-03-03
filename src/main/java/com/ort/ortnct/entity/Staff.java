@@ -5,9 +5,11 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
+import org.hibernate.validator.constraints.UniqueElements;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 import java.time.LocalDate;
 import java.util.Set;
 
@@ -23,32 +25,42 @@ public class Staff
     @GeneratedValue(generator = "mySeqGenStaff")
     private Long id;
 
-    @Column(name = "first_name")
+    @Column(name = "first_name", nullable = false)
+    @NotNull
     private String firstName;
 
-    @Column(name = "last_name")
+    @Column(name = "last_name", nullable = false)
+    @NotNull
     private String lastName;
 
     @Column(name = "birth_date")
     @DateTimeFormat(style = "yyyy-MM-dd")
+    @NotNull
     private LocalDate birthDate;
 
-    @Column(name = "is_male")
-    private Boolean isMale;
+    @Column(name = "is_male", nullable = false)
+    @NotNull
+    private boolean isMale;
 
-    @Column(name = "phone_number")
+    @Column(name = "phone_number", nullable = false, unique = true)
+    @NotNull
     private String phoneNumber;
 
-    @Column(name = "email")
+    @Column(name = "email", nullable = false, unique = true)
+    @NotNull
     private String email;
 
-    @Column(name = "login")
+    @UniqueElements
+    @NotNull
+    @Column(name = "login", nullable = false, unique = true)
     private String login;
 
-    @Column(name = "password")
+    @NotNull
+    @Column(name = "password", nullable = false)
     private String password;
 
-    @Column(name = "position")
+    @Column(name = "position", nullable = false)
+    @NotNull
     @ApiModelProperty(notes = "position of the staff , ADMIN or EDITOR")
     private String position;
 
@@ -68,7 +80,7 @@ public class Staff
     {
     }
 
-    public Staff(String firstName, String lastName, LocalDate birthDate, Boolean isMale, String phoneNumber, String email, String login, String password, String position)
+    public Staff(String firstName, String lastName, LocalDate birthDate, boolean isMale, String phoneNumber, String email, String login, String password, String position)
     {
         this.firstName = firstName;
         this.lastName = lastName;
@@ -116,12 +128,12 @@ public class Staff
         this.birthDate = birthDate;
     }
 
-    public Boolean getMale()
+    public boolean getMale()
     {
         return isMale;
     }
 
-    public void setMale(Boolean male)
+    public void setMale(boolean male)
     {
         isMale = male;
     }

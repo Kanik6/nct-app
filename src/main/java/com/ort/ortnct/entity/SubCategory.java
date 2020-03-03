@@ -5,6 +5,7 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiModel;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Table(name = "sub_categories")
@@ -25,18 +26,18 @@ public class SubCategory
             joinColumns = @JoinColumn(name = "sub_category_id"))
     private Category category;
 
-    @OneToOne(mappedBy = "subCategory")
-    private Subject subject;
+    @OneToMany(mappedBy = "subCategory", cascade = CascadeType.ALL)
+    private List<Subject> subjects;
 
     public SubCategory()
     {
     }
 
-    public SubCategory(String subCategoryName, Category category, Subject subject)
+    public SubCategory(String subCategoryName, Category category, List<Subject> subjects)
     {
         this.subCategoryName = subCategoryName;
         this.category = category;
-        this.subject = subject;
+        this.subjects = subjects;
     }
 
     public Long getId()
@@ -64,14 +65,14 @@ public class SubCategory
         this.category = category;
     }
 
-    public Subject getSubject()
+    public List<Subject> getSubject()
     {
-        return subject;
+        return subjects;
     }
 
-    public void setSubject(Subject subject)
+    public void setSubject(List<Subject> subjects)
     {
-        this.subject = subject;
+        this.subjects = subjects;
     }
 
     @Override
@@ -81,7 +82,7 @@ public class SubCategory
                 "id=" + id +
                 ", subCategoryName='" + subCategoryName + '\'' +
                 ", category=" + category +
-                ", subject=" + subject +
+                ", subject=" + subjects +
                 '}';
     }
 }

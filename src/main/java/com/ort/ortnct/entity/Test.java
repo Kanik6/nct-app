@@ -33,12 +33,11 @@ public class Test
     {
     }
 
-    public Test(String instruction, Long qcount, Subject subject, List<Question> question)
+    public Test(String instruction, Long qcount)
     {
         this.instruction = instruction;
         this.qcount = qcount;
         this.subject = subject;
-        this.question = question;
     }
 
     public Long getId()
@@ -84,6 +83,11 @@ public class Test
     public void setQuestion(List<Question> question)
     {
         this.question = question;
+    }
+
+    public void setOneQuestion(Question question)
+    {
+        this.question.add(question);
     }
 
     @Override

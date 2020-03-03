@@ -17,7 +17,7 @@ public class GetCurrentStaff
     public Staff getCurrentStaff(Authentication authentication)
     {
         User currentStaff = (org.springframework.security.core.userdetails.User) authentication.getPrincipal();
-        Staff staff = staffRepository.findByFirstName(currentStaff.getUsername()).get();
+        Staff staff = staffRepository.findByLogin(currentStaff.getUsername()).get();
 
         return staff;
     }
