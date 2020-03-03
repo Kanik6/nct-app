@@ -39,21 +39,18 @@ public class SubjectCreationRequestService
         subject.setTestType(TestType.FINALTEST);
         SubCategory subCategory = subCategoryService.getSubCategory(subject.getSubCategory().getSubCategoryName());
         subject.setSubCategory(subCategory);
+
         Subject subject1 = subjectService.createSubjectInDB(subject);
 
         Test test1 = subject1.getTest();
         test1.setInstruction(test.getInstruction());
-//        question.setTest(test1);
+        // mapping question to test
+        question.setTest(test1);
         Question question1 = questionService.createQuestionInDB(question);
-        List<Answer> answers1 = answerService.createAnswerInDB(answers);
-        question1.setTest(test1);
-        question1.setAnswer(answers1);
-        //------------------------------
-        System.out.println(question1.getTest().getId());
-        //------------------------------
-        test1.setOneQuestion(question1);
-//        subject1.setTest(test1);
+        // mapping answers to question
+        answers.stream().forEach(e -> e.setQuestion(question1));
+        answerService.createAnswerInDB(answers);
 
-        return subjectService.createSubjectInDB(subject1);
+        return subject1;
     }
 }

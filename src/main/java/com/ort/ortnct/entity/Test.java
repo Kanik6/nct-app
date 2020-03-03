@@ -1,5 +1,8 @@
 package com.ort.ortnct.entity;
 
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiModel;
 
@@ -9,6 +12,7 @@ import java.util.List;
 @Entity
 @Table(name = "tests")
 @ApiModel(value = "test model")
+@JsonIdentityInfo(generator= ObjectIdGenerators.PropertyGenerator.class, property="id")
 public class Test
 {
     @Column(name = "test_id")

@@ -1,6 +1,7 @@
 package com.ort.ortnct.entity;
 
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.ort.ortnct.enums.TestType;
 import io.swagger.annotations.ApiModel;
 
