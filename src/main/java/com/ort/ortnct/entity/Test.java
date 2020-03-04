@@ -1,6 +1,7 @@
 package com.ort.ortnct.entity;
 
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.JsonIdentityReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import io.swagger.annotations.Api;
@@ -27,6 +28,7 @@ public class Test
     @Column(name = "question_count")
     private Long qcount;
 
+    @JsonIgnore
     @OneToOne
     @JoinColumn(name = "subject_id")
     private Subject subject;

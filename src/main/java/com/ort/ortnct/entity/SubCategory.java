@@ -2,6 +2,7 @@ package com.ort.ortnct.entity;
 
 
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.JsonIdentityReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import io.swagger.annotations.Api;
@@ -14,6 +15,7 @@ import java.util.List;
 @Table(name = "sub_categories")
 @ApiModel(value = "sub category model")
 @JsonIdentityInfo(generator= ObjectIdGenerators.PropertyGenerator.class, property="id")
+@JsonIdentityReference(alwaysAsId = true)
 public class SubCategory
 {
     @Column(name = "sub_category_id")

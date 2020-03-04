@@ -6,6 +6,7 @@ import org.springframework.context.annotation.EnableMBeanExport;
 import org.springframework.web.bind.annotation.CrossOrigin;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
 import java.util.List;
 
 @Entity
@@ -19,6 +20,7 @@ public class Category
     private Long id;
 
     @Column(name = "category_name")
+    @NotBlank(message = "Category name is mandatory")
     private String name;
 
     @OneToMany(mappedBy = "category")
@@ -26,12 +28,6 @@ public class Category
 
     public Category()
     {
-    }
-
-    public Category(String name, List<SubCategory> subCategory)
-    {
-        this.name = name;
-        this.subCategory = subCategory;
     }
 
     public Category(String name)

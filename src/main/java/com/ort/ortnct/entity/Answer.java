@@ -1,15 +1,18 @@
 package com.ort.ortnct.entity;
 
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.JsonIdentityReference;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import io.swagger.annotations.ApiModel;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
 
 @Entity
 @Table(name = "answers")
 @ApiModel(value = "answer model")
 @JsonIdentityInfo(generator= ObjectIdGenerators.PropertyGenerator.class, property="id")
+@JsonIdentityReference(alwaysAsId = true)
 public class Answer
 {
     @Column(name = "answer_id")
@@ -18,10 +21,11 @@ public class Answer
     private Long id;
 
     @Column(name = "answer")
+    @NotBlank(message = "Answer is mandatory")
     private String answer;
 
     @Column(name = "is_correct")
-    private Boolean isCorrect;
+    private Boolean isCorrect = false;
 
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinTable(name = "question_answers",

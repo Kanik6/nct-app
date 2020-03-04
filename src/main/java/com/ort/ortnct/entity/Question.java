@@ -1,12 +1,14 @@
 package com.ort.ortnct.entity;
 
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.JsonIdentityReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiModel;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
 import java.util.List;
 
 @Entity
@@ -21,6 +23,7 @@ public class Question
     private Long id;
 
     @Column(name = "question")
+    @NotBlank(message = "Question is mandatory!")
     private String question;
 
     @ManyToOne(cascade = CascadeType.ALL)
