@@ -7,6 +7,7 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiModel;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -31,7 +32,7 @@ public class Test
     private Subject subject;
 
     @OneToMany(mappedBy = "test")
-    private List<Question> question;
+    private List<Question> question = new ArrayList<>();
 
     public Test()
     {
@@ -41,7 +42,6 @@ public class Test
     {
         this.instruction = instruction;
         this.qcount = qcount;
-        this.subject = subject;
     }
 
     public Long getId()

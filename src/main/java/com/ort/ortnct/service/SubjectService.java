@@ -18,10 +18,25 @@ public class SubjectService
     public Subject createSubjectInDB(Subject subject)
     {
         Subject subject1 = subjectRepository.save(subject);
-        Test test = testService.createTestInDB(subject1);
-        subject1.setTest(test);
+//        Test test = testService.createTestInDB(subject1);
+//        subject1.setTest(test);
 
         return subject1;
-
     }
+
+    public Subject updateSubject(Subject subject)
+    {
+        Subject subject1 = subjectRepository.findById(subject.getId()).
+                map(e ->
+                {
+                    e.setName(subject.getName());
+                    e.setSubCategory(subject.getSubCategory());
+                    e.setTest(subject.getTest());
+                    return subjectRepository.save(e);
+                })
+                .orElseGet(() -> {return subjectRepository.save(subject);});
+        return subject1;
+    }
+
+
 }

@@ -23,14 +23,14 @@ public class Question
     @Column(name = "question")
     private String question;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinTable(name = "test_questions",
             inverseJoinColumns = @JoinColumn(name = "test_id"),
             joinColumns = @JoinColumn(name = "question_id"))
     private Test test;
 
 
-    @OneToMany(mappedBy = "question")
+    @OneToMany(mappedBy = "question", cascade = CascadeType.ALL)
     private List<Answer> answer;
 
     public Question()

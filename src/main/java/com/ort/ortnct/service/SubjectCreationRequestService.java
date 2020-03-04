@@ -28,29 +28,45 @@ public class SubjectCreationRequestService
     @Autowired
     SubCategoryService subCategoryService;
 
+    @Autowired
+    TestService testService;
+
     // adding final test ORT
     public Subject fillSubject(SubjectCreationHelper subjectCreationHelper)
     {
-        Subject subject = subjectCreationHelper.getSubject();// name , subcategory(BASIC , ADDITIONAL)
-        Test test = subjectCreationHelper.getTest();// instruction
-        Question question = subjectCreationHelper.getQuestion();//question
-        List<Answer> answers = subjectCreationHelper.getAnswers();//list answers
+        //--------------------------------WRAPPER_HELPER
+        Subject subject = subjectCreationHelper.getSubject(); // name , subcategory(BASIC , ADDITIONAL)
+        Test test = subjectCreationHelper.getTest(); // instruction
+        Question question = subjectCreationHelper.getQuestion(); //question
+        List<Answer> answers = subjectCreationHelper.getAnswers(); //list answers
         //--------------------------------CREATION IN DB-----------------------------------------
         subject.setTestType(TestType.FINALTEST);
         SubCategory subCategory = subCategoryService.getSubCategory(subject.getSubCategory().getSubCategoryName());
         subject.setSubCategory(subCategory);
 
+//         creating subject
         Subject subject1 = subjectService.createSubjectInDB(subject);
-
-        Test test1 = subject1.getTest();
-        test1.setInstruction(test.getInstruction());
-        // mapping question to test
+        // creating test mapping to subject AND creating in db
+        test.setSubject(subject1);
+        Test test1 = testService.createTestInDB(test);
+//        Test test1 = subject1.getTest();
+//        test1.setInstruction(test.getInstruction());
+        // mapping question to test AND creating in db
         question.setTest(test1);
         Question question1 = questionService.createQuestionInDB(question);
-        // mapping answers to question
+//        test1.setOneQuestion(question1);
+        // mapping answers to question AND creating in db
         answers.stream().forEach(e -> e.setQuestion(question1));
-        answerService.createAnswerInDB(answers);
+        List<Answer> answers1 = answerService.createAnswerInDB(answers);
+        // creating subject mapping to test and update
+        subject1.setTest(test1);
+        Subject subject2 = subjectService.updateSubject(subject1);
 
-        return subject1;
+        test1.setOneQuestion(question1);
+        testService.updateTestInDB(test1);
+
+        question1.setAnswer(answers1);
+        questionService.updateQuestionInDB(question1);
+        return subject2;
     }
 }

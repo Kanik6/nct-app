@@ -1,7 +1,9 @@
 package com.ort.ortnct.entity;
 
 
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import com.ort.ortnct.enums.TestType;
 import io.swagger.annotations.ApiModel;
 
@@ -10,6 +12,7 @@ import javax.persistence.*;
 @Entity
 @Table(name = "subjects")
 @ApiModel(value = "subject model")
+@JsonIdentityInfo(generator= ObjectIdGenerators.PropertyGenerator.class, property="id")
 public class Subject
 {
     @Column(name = "subject_id")
@@ -20,13 +23,13 @@ public class Subject
     @Column(name = "subject_name")
     private String name;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinTable(name = "subject_sub_category",
             joinColumns = @JoinColumn(name = "subject_id"),
             inverseJoinColumns = @JoinColumn(name = "sub_category_id"))
     private SubCategory subCategory;
 
-    @OneToOne(mappedBy = "subject")
+    @OneToOne(mappedBy = "subject", cascade = CascadeType.ALL)
     private Test test;
 
     @Column(name = "test_type")

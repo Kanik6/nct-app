@@ -23,7 +23,7 @@ public class Answer
     @Column(name = "is_correct")
     private Boolean isCorrect;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinTable(name = "question_answers",
             inverseJoinColumns = @JoinColumn(name = "question_id"),
             joinColumns = @JoinColumn(name = "answer_id"))
