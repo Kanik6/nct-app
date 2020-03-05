@@ -5,6 +5,7 @@ import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.JsonIdentityReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
+import com.ort.ortnct.enums.SubCategories;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiModel;
 
@@ -24,7 +25,8 @@ public class SubCategory
     private Long id;
 
     @Column(name = "sub_category_name")
-    private String subCategoryName;
+    @Enumerated(EnumType.STRING)
+    private SubCategories subCategoryName;
 
     @ManyToOne
     @JoinTable(name = "category_sub_categories",
@@ -39,7 +41,7 @@ public class SubCategory
     {
     }
 
-    public SubCategory(String subCategoryName, Category category, List<Subject> subjects)
+    public SubCategory(SubCategories subCategoryName, Category category, List<Subject> subjects)
     {
         this.subCategoryName = subCategoryName;
         this.category = category;
@@ -51,12 +53,12 @@ public class SubCategory
         return id;
     }
 
-    public String getSubCategoryName()
+    public SubCategories getSubCategoryName()
     {
         return subCategoryName;
     }
 
-    public void setSubCategoryName(String subCategoryName)
+    public void setSubCategoryName(SubCategories subCategoryName)
     {
         this.subCategoryName = subCategoryName;
     }

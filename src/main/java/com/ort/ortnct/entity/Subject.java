@@ -7,8 +7,10 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import com.ort.ortnct.enums.TestType;
 import io.swagger.annotations.ApiModel;
+import org.hibernate.validator.constraints.UniqueElements;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
 
 @Entity
 @Table(name = "subjects")
@@ -21,7 +23,8 @@ public class Subject
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "subject_name")
+    @Column(name = "subject_name", unique = true)
+    @NotBlank(message = "subject name is mandatory!")
     private String name;
 
     @ManyToOne(cascade = CascadeType.ALL)

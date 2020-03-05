@@ -1,9 +1,6 @@
 package com.ort.ortnct.myHelper;
 
-import com.ort.ortnct.entity.Answer;
-import com.ort.ortnct.entity.Question;
-import com.ort.ortnct.entity.Subject;
-import com.ort.ortnct.entity.Test;
+import com.ort.ortnct.entity.*;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
@@ -15,17 +12,19 @@ public class SubjectCreationHelper
     private Question question;
     private List<Answer> answers;
     private Test test;
+    private SubCategory subCategory;
 
     public SubjectCreationHelper()
     {
     }
 
-    public SubjectCreationHelper(Subject subject, Question question, List<Answer> answers, Test test)
+    public SubjectCreationHelper(Subject subject, Question question, List<Answer> answers, Test test, SubCategory subCategory)
     {
         this.subject = subject;
         this.question = question;
         this.answers = answers;
         this.test = test;
+        this.subCategory = subCategory;
     }
 
     public Subject getSubject()
@@ -66,5 +65,15 @@ public class SubjectCreationHelper
     public void setTest(Test test)
     {
         this.test = test;
+    }
+
+    public SubCategory getSubCategory()
+    {
+        return subCategory;
+    }
+
+    public void setSubCategory(SubCategory subCategory)
+    {
+        this.subCategory = subCategory;
     }
 }

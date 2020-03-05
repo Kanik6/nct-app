@@ -17,12 +17,16 @@ public class SubjectService
 
     public Subject createSubjectInDB(Subject subject)
     {
-        Subject subject1 = subjectRepository.save(subject);
-//        Test test = testService.createTestInDB(subject1);
-//        subject1.setTest(test);
+        return subjectRepository.save(subject);
 
-        return subject1;
     }
+
+//    public Subject getSubjectByNameAndCategoryFromDBorCreate(Subject subject)
+//    {
+////        subject.getSubCategory().getSubCategoryName().name()
+//       return subjectRepository.findSubjectByNameAndSubCategory(subject.getName())
+//               .orElse(createSubjectInDB(subject));
+//    }
 
     public Subject updateSubject(Subject subject)
     {
@@ -39,4 +43,9 @@ public class SubjectService
     }
 
 
+    public Subject findSubjectByNameAndSubcategory(Subject subject)
+    {
+        return subjectRepository.findSubjectByNameAndSubCategory(subject.getName(),
+                subject.getSubCategory().getSubCategoryName().name()).orElse(null);
+    }
 }

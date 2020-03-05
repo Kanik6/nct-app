@@ -26,6 +26,7 @@ public class Question
     @NotBlank(message = "Question is mandatory!")
     private String question;
 
+    @JsonIgnore
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinTable(name = "test_questions",
             inverseJoinColumns = @JoinColumn(name = "test_id"),
