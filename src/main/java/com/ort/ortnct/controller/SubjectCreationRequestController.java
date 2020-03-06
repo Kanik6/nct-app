@@ -17,9 +17,17 @@ public class SubjectCreationRequestController
     SubjectCreationRequestService subjectCreationRequestService;
 
 
-    @PostMapping("/subjectCreationRequest")
-    public Subject subjectCreationRequest(@RequestBody SubjectCreationHelper subjectCreationHelper)
+    //ADD FINAL TEST ORT
+    @PostMapping("/subjectCreationRequestOF")
+    public Subject subjectCreationRequestORTFinal(@RequestBody SubjectCreationHelper subjectCreationHelper)
     {
-       return subjectCreationRequestService.fillSubject(subjectCreationHelper);
+       return subjectCreationRequestService.addFinalTestORT(subjectCreationHelper);
+    }
+
+    //ADD SUBJECT TEST ORT
+    @PostMapping("/subjectCreationRequestOS")
+    public Subject subjectCreationRequestORTSubject(@RequestBody SubjectCreationHelper subjectCreationHelper)
+    {
+        return subjectCreationRequestService.addSubjectTestORT(subjectCreationHelper);
     }
 }
