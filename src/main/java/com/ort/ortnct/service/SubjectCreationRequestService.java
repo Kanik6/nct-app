@@ -16,9 +16,6 @@ import java.util.List;
 public class SubjectCreationRequestService
 {
     @Autowired
-    SubjectCreationRequestController subjectCreationRequestController;
-
-    @Autowired
     SubjectService subjectService;
 
     @Autowired
