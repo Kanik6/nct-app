@@ -23,45 +23,54 @@ public class Staff
     @Id
     @SequenceGenerator(name = "mySeqGenStaff", sequenceName = "mySeqStaff", initialValue = 3, allocationSize = 1)
     @GeneratedValue(generator = "mySeqGenStaff")
+    @ApiModelProperty(position = 0)
     private Long id;
 
     @Column(name = "first_name", nullable = false)
     @NotNull
+    @ApiModelProperty(position = 3)
     private String firstName;
 
     @Column(name = "last_name", nullable = false)
     @NotNull
+    @ApiModelProperty(position = 4)
     private String lastName;
 
     @Column(name = "birth_date")
     @DateTimeFormat(style = "yyyy-MM-dd")
     @NotNull
+    @ApiModelProperty(position = 5)
     private LocalDate birthDate;
 
     @Column(name = "is_male", nullable = false)
     @NotNull
+    @ApiModelProperty(position = 6)
     private boolean isMale;
 
     @Column(name = "phone_number", nullable = false, unique = true)
     @NotNull
+    @ApiModelProperty(position = 7)
     private String phoneNumber;
 
     @Column(name = "email", nullable = false, unique = true)
     @NotNull
+    @ApiModelProperty(position = 8)
     private String email;
 
     @UniqueElements
     @NotNull
     @Column(name = "login", nullable = false, unique = true)
+    @ApiModelProperty(position = 1)
     private String login;
 
     @NotNull
     @Column(name = "password", nullable = false)
+    @ApiModelProperty(position = 2)
     private String password;
 
     @Column(name = "position", nullable = false)
     @NotNull
-    @ApiModelProperty(notes = "position of the staff , ADMIN or EDITOR")
+    @ApiModelProperty(notes = "position of the staff , ADMIN or EDITOR", position = 9)
     private String position;
 
     @JsonIgnore

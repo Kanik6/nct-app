@@ -32,9 +32,11 @@ public class SubCategory
     @JoinTable(name = "category_sub_categories",
             inverseJoinColumns = @JoinColumn(name = "category_id"),
             joinColumns = @JoinColumn(name = "sub_category_id"))
+    @JsonIgnore
     private Category category;
 
     @OneToMany(mappedBy = "subCategory", cascade = CascadeType.ALL)
+    @JsonIgnore
     private List<Subject> subjects;
 
     public SubCategory()

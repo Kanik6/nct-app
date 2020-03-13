@@ -2,6 +2,7 @@ package com.ort.ortnct.entity;
 
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.JsonIdentityReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import io.swagger.annotations.ApiModel;
 
@@ -27,6 +28,7 @@ public class Answer
     @Column(name = "is_correct")
     private Boolean isCorrect = false;
 
+    @JsonIgnore
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinTable(name = "question_answers",
             inverseJoinColumns = @JoinColumn(name = "question_id"),

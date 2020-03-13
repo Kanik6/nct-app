@@ -67,6 +67,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter
         registry.anyRequest()
                 .authenticated()
                 .and()
+//                .formLogin().loginPage("/login").permitAll()
                 .httpBasic()
                 .and()
                 .sessionManagement()

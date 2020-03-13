@@ -1,7 +1,9 @@
 package com.ort.ortnct.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.persistence.*;
@@ -15,35 +17,41 @@ public class Usr
 {
     @Column(name = "usr_id", nullable = false, unique = true)
     @Id
+    @ApiModelProperty(position = 0)
     private String id;
 
     @Column(name = "age")
+    @ApiModelProperty(position = 1)
     private Long age;
 
     @Column(name = "region")
+    @ApiModelProperty(position = 2)
     private String region;
 
     @Column(name = "grade")
+    @ApiModelProperty(position = 3)
     private Long grade;
 
+    @JsonIgnore
     @OneToOne(mappedBy = "usr")
+    @ApiModelProperty(position = 4)
     private TestResult result;
 
+    @JsonIgnore
     @OneToMany(mappedBy = "usrr")
+    @ApiModelProperty(position = 5)
     private List<UsrAnswer> usrAnswer;
 
     public Usr()
     {
     }
 
-    public Usr(String id, Long age, String region, Long grade, TestResult result, List<UsrAnswer> usrAnswer)
+    public Usr(String id, Long age, String region, Long grade)
     {
         this.id = id;
         this.age = age;
         this.region = region;
         this.grade = grade;
-        this.result = result;
-        this.usrAnswer = usrAnswer;
     }
 
     public String getId()

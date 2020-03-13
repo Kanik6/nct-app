@@ -1,5 +1,6 @@
 package com.ort.ortnct.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiModel;
 import org.springframework.context.annotation.EnableMBeanExport;
@@ -23,6 +24,7 @@ public class Category
     @NotBlank(message = "Category name is mandatory")
     private String name;
 
+    @JsonIgnore
     @OneToMany(mappedBy = "category")
     private List<SubCategory> subCategory;
 

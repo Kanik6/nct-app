@@ -7,6 +7,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import com.ort.ortnct.enums.TestType;
 import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
 import org.hibernate.validator.constraints.UniqueElements;
 
 import javax.persistence.*;
@@ -21,23 +22,31 @@ public class Subject
     @Column(name = "subject_id")
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @ApiModelProperty(position = 0)
     private Long id;
 
     @Column(name = "subject_name", unique = true)
     @NotBlank(message = "subject name is mandatory!")
+    @ApiModelProperty(position = 1)
     private String name;
 
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinTable(name = "subject_sub_category",
             joinColumns = @JoinColumn(name = "subject_id"),
             inverseJoinColumns = @JoinColumn(name = "sub_category_id"))
+    @ApiModelProperty(position = 2)
+    @JsonIgnore
     private SubCategory subCategory;
 
     @OneToOne(mappedBy = "subject", cascade = CascadeType.ALL)
+    @ApiModelProperty(position = 3)
+    @JsonIgnore
     private Test test;
 
     @Column(name = "test_type")
     @Enumerated(EnumType.STRING)
+    @ApiModelProperty(position = 4)
+    @JsonIgnore
     private TestType testType;
 
     public Subject()
