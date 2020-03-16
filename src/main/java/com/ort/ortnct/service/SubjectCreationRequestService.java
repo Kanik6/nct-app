@@ -1,5 +1,6 @@
 package com.ort.ortnct.service;
 
+import com.ort.ortnct.dto.SubjectDto;
 import com.ort.ortnct.entity.*;
 import com.ort.ortnct.enums.SubCategories;
 import com.ort.ortnct.enums.TestType;
@@ -159,4 +160,15 @@ public class SubjectCreationRequestService
             return subject1;
 
     }
+    public Subject addFinalTestORTMAPPER(Subject subject)
+    {
+//        System.out.println(subject.getName());
+//        System.out.println(subject.getTest().getInstruction());
+//        System.out.println(subject.getTestType());
+//        System.out.println(subject.getTest().getQuestion().stream().findFirst());
+//        System.out.println(subject.getTest().getQuestion().stream().findFirst().map(Question::getAnswer));
+
+        return null;
+    }
+
 }

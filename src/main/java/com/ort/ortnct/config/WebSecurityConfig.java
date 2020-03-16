@@ -49,7 +49,12 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter
                         "/configuration/security",
                         "/swagger-ui.html",
                         "/webjars/**").permitAll()
-                 .antMatchers(HttpMethod.POST,"/createUser").permitAll();
+                .antMatchers(HttpMethod.POST,"/createUser").permitAll()
+                .antMatchers(HttpMethod.POST,"/subject/ort/final").permitAll()
+                .antMatchers(HttpMethod.GET,"/eduMaterial").permitAll()
+                .antMatchers(HttpMethod.DELETE,"/eduMaterial").permitAll()
+                .antMatchers(HttpMethod.PUT,"/eduMaterial").permitAll();
+
 
         List<View> views = viewRepository.findAll();
 

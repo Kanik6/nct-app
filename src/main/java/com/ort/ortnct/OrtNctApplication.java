@@ -1,6 +1,7 @@
 package com.ort.ortnct;
 
 
+import org.modelmapper.ModelMapper;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
@@ -26,6 +27,12 @@ public class OrtNctApplication
 	@Bean
 	public PasswordEncoder encoder() {
 		return new BCryptPasswordEncoder();
+	}
+
+	@Bean
+	public ModelMapper modelMapper()
+	{
+		return new ModelMapper();
 	}
 
 	@Bean
