@@ -19,7 +19,7 @@ public class EduMaterialController
 
     @PostMapping("/eduMaterial")
     @ApiOperation(value="Create educational material", tags = { "educational material" })
-    public EduMaterial createEduMat(EduMaterial eduMaterial)
+    public EduMaterial createEduMat(@RequestBody EduMaterial eduMaterial)
     {
         return eduMaterialService.createEduMaterial(eduMaterial);
     }
@@ -33,14 +33,14 @@ public class EduMaterialController
 
     @PutMapping("/eduMaterial")
     @ApiOperation(value="Update educational material", tags = { "educational material" })
-    public EduMaterial updateEduMat(EduMaterial eduMaterial, Long id)
+    public EduMaterial updateEduMat(@RequestBody EduMaterial eduMaterial,@RequestParam Long id)
     {
         return eduMaterialService.updateEduMaterial(eduMaterial, id);
     }
 
     @DeleteMapping("/eduMaterial")
     @ApiOperation(value="delete educational material", tags = { "educational material" })
-    public String deleteEduMat(Long id)
+    public String deleteEduMat(@RequestParam Long id)
     {
         return eduMaterialService.deleteEduMaterial(id);
     }

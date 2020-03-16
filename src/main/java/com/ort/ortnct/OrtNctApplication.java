@@ -42,7 +42,7 @@ public class OrtNctApplication
 
 		ApiInfo metaData = new ApiInfo
 				(
-						"Shop Api Documentation",
+						"ORT-NCT Api Documentation",
 						"Spring boot rest Api",
 						"1.0",
 						"Terms of conditions",
