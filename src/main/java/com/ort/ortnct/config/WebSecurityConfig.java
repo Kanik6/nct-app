@@ -42,14 +42,14 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter
         ExpressionUrlAuthorizationConfigurer<HttpSecurity>.ExpressionInterceptUrlRegistry registry =
                  http.csrf().disable()
                 .authorizeRequests()
-                .antMatchers("/getUser/{user_id}").permitAll()
+                .antMatchers("/user/{user_id}").permitAll()
                 .antMatchers("/v2/api-docs",
                         "/configuration/ui",
                         "/swagger-resources/**",
                         "/configuration/security",
                         "/swagger-ui.html",
                         "/webjars/**").permitAll()
-                .antMatchers(HttpMethod.POST,"/createUser").permitAll()
+                .antMatchers(HttpMethod.POST,"/user").permitAll()
                 .antMatchers(HttpMethod.POST,"/subject/ort/final").permitAll()
                 .antMatchers(HttpMethod.GET,"/eduMaterial").permitAll()
                 .antMatchers(HttpMethod.DELETE,"/eduMaterial").permitAll()
