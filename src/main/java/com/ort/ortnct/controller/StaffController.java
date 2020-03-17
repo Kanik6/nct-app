@@ -31,11 +31,32 @@ public class StaffController
        return staffService.createStaffInDB(staff, authentication);
     }
 
+
+
 //    @ApiOperation(value="Get list of Staff", tags = { "Staff" })
 //    @GetMapping("/getStaff")
 //    public List<StaffDto> getStaff()
 //    {
 //        return staffService.getStaffFromDB().stream().map(converterService::convertToDto).collect(Collectors.toList());
 //    }
+    @ApiOperation(value="Get list of Staff", tags = { "Staff" })
+    @GetMapping("/staff")
+    public List<Staff> getStaff()
+    {
+        return staffService.getListStaffFromDB();
+    }
 
+    @ApiOperation(value="Update Staff", tags = { "Staff" })
+    @PutMapping("/staff")
+    public Staff updateStaff(@RequestBody Staff staff,@RequestParam Long id,  Authentication authentication)
+    {
+        return staffService.updateStaffInDB(staff, id, authentication);
+    }
+
+    @ApiOperation(value="Delete Staff", tags = { "Staff" })
+    @DeleteMapping("/staff")
+    public String deleteStaff(@RequestParam Long id)
+    {
+        return staffService.deleteStaffInDB(id);
+    }
 }

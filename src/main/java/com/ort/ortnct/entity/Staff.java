@@ -57,7 +57,6 @@ public class Staff
     @ApiModelProperty(position = 8)
     private String email;
 
-    @UniqueElements
     @NotNull
     @Column(name = "login", nullable = false, unique = true)
     @ApiModelProperty(position = 1)

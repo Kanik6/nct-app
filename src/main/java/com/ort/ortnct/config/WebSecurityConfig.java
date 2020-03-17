@@ -53,7 +53,14 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter
                 .antMatchers(HttpMethod.POST,"/subject/ort/final").permitAll()
                 .antMatchers(HttpMethod.GET,"/eduMaterial").permitAll()
                 .antMatchers(HttpMethod.DELETE,"/eduMaterial").permitAll()
-                .antMatchers(HttpMethod.PUT,"/eduMaterial").permitAll();
+                .antMatchers(HttpMethod.PUT,"/eduMaterial").permitAll()
+                .antMatchers(HttpMethod.POST,"/ subjectCreationRequestOFMAP").permitAll()
+        //
+                .antMatchers(HttpMethod.GET,"/staff").permitAll()
+                .antMatchers(HttpMethod.DELETE,"/staff").permitAll()
+                .antMatchers(HttpMethod.PUT,"/staff").permitAll()
+                .antMatchers(HttpMethod.POST,"/staff").permitAll();
+
 
 
         List<View> views = viewRepository.findAll();

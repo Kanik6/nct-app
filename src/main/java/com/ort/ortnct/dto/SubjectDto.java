@@ -24,7 +24,7 @@ public class SubjectDto
 
     private String question;
 
-    private List<String> answers;
+    private List<Answer> answers;
 
 //    private TestType testType;
     private String testType;
@@ -33,7 +33,7 @@ public class SubjectDto
     {
     }
 
-    public SubjectDto(Long id, String name, String subCategoryName, String instruction,  String question, List<String> answers, String testType)
+    public SubjectDto(Long id, String name, String subCategoryName, String instruction,  String question, List<Answer> answers, String testType)
     {
         this.id = id;
         this.name = name;
@@ -94,12 +94,12 @@ public class SubjectDto
         this.question = question;
     }
 
-    public List<String> getAnswers()
+    public List<Answer> getAnswers()
     {
         return answers;
     }
 
-    public void setAnswers(List<String> answers)
+    public void setAnswers(List<Answer> answers)
     {
         this.answers = answers;
     }
