@@ -36,6 +36,10 @@ public class Test
     @OneToMany(mappedBy = "test")
     private List<Question> question = new ArrayList<>();
 
+    @JsonIgnore
+    @OneToMany(mappedBy = "test")
+    private List<TestResult> testResult;
+
     public Test()
     {
     }
@@ -96,6 +100,16 @@ public class Test
         this.question.add(question);
     }
 
+    public List<TestResult> getTestResult()
+    {
+        return testResult;
+    }
+
+    public void setTestResult(List<TestResult> testResult)
+    {
+        this.testResult = testResult;
+    }
+
     @Override
     public String toString()
     {
@@ -105,6 +119,7 @@ public class Test
                 ", qcount=" + qcount +
                 ", subject=" + subject +
                 ", question=" + question +
+                ", testResult=" + testResult +
                 '}';
     }
 }

@@ -1,6 +1,7 @@
 package com.ort.ortnct.entity;
 
-import io.swagger.annotations.Api;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import io.swagger.annotations.ApiModel;
 
 import javax.persistence.*;
@@ -10,42 +11,78 @@ import javax.persistence.*;
 @ApiModel(value = "test result model")
 public class TestResult
 {
-    @Column(name = "test_result_id")
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "test_result_id")
     private Long id;
 
+    @Column(name = "correct")
+    private Long corrent;
+
+    @Column(name = "incorrect")
+    private Long incorrent;
+
+    @Column(name = "score")
+    private Long score;
+
     @OneToOne
-    @JoinColumn(name = "usr_id")
+    @JoinColumn(name = "user_id")
     private Usr usr;
 
-    @Column(name = "us_id")
-    private String usrId;
-
-    @OneToOne
+    @JsonIgnore
+    @ManyToOne
+    @JoinTable(name = "test_results",
+            inverseJoinColumns = @JoinColumn(name = "test_id"),
+            joinColumns = @JoinColumn(name = "test_result_id"))
     @JoinColumn(name = "test_id")
     private Test test;
-
-    @Column(name = "correct")
-    private Long correct;
-
-    @Column(name = "in_correct")
-    private Long inCorrect;
 
     public TestResult()
     {
     }
 
-    public TestResult(String usrId, Long correct, Long inCorrect)
+    public TestResult(Long corrent, Long incorrent, Long score, Usr usr, Test test)
     {
-        this.usrId = usrId;
-        this.correct = correct;
-        this.inCorrect = inCorrect;
+        this.corrent = corrent;
+        this.incorrent = incorrent;
+        this.score = score;
+        this.usr = usr;
+        this.test = test;
     }
 
     public Long getId()
     {
         return id;
+    }
+
+    public Long getCorrent()
+    {
+        return corrent;
+    }
+
+    public void setCorrent(Long corrent)
+    {
+        this.corrent = corrent;
+    }
+
+    public Long getIncorrent()
+    {
+        return incorrent;
+    }
+
+    public void setIncorrent(Long incorrent)
+    {
+        this.incorrent = incorrent;
+    }
+
+    public Long getScore()
+    {
+        return score;
+    }
+
+    public void setScore(Long score)
+    {
+        this.score = score;
     }
 
     public Usr getUsr()
@@ -58,16 +95,6 @@ public class TestResult
         this.usr = usr;
     }
 
-    public String getUsrId()
-    {
-        return usrId;
-    }
-
-    public void setUsrId(String usrId)
-    {
-        this.usrId = usrId;
-    }
-
     public Test getTest()
     {
         return test;
@@ -78,36 +105,16 @@ public class TestResult
         this.test = test;
     }
 
-    public Long getCorrect()
-    {
-        return correct;
-    }
-
-    public void setCorrect(Long correct)
-    {
-        this.correct = correct;
-    }
-
-    public Long getInCorrect()
-    {
-        return inCorrect;
-    }
-
-    public void setInCorrect(Long inCorrect)
-    {
-        this.inCorrect = inCorrect;
-    }
-
     @Override
     public String toString()
     {
         return "TestResult{" +
                 "id=" + id +
+                ", corrent=" + corrent +
+                ", incorrent=" + incorrent +
+                ", score=" + score +
                 ", usr=" + usr +
-                ", usrId='" + usrId + '\'' +
                 ", test=" + test +
-                ", correct=" + correct +
-                ", inCorrect=" + inCorrect +
                 '}';
     }
 }
