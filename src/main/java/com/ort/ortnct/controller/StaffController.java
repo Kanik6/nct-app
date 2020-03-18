@@ -14,7 +14,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @RestController
-@CrossOrigin
+@CrossOrigin(origins = "*")
 @Api(value = "Staff", description = "REST API for Staff", tags = { "Staff" })
 public class StaffController
 {

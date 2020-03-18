@@ -11,7 +11,7 @@ import java.util.List;
 
 @RestController
 @Api(value = "User", description = "REST API for User", tags = { "User" })
-@CrossOrigin
+@CrossOrigin(origins = "*")
 public class UsrController
 {
     @Autowired

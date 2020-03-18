@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@CrossOrigin
+@CrossOrigin(origins = "*")
 @Api(value = "Test result", description = "REST API for Test result", tags = { "Test result" })
 public class TestResultController
 {

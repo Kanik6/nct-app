@@ -5,7 +5,7 @@ import com.ort.ortnct.entity.Subject;
 import com.ort.ortnct.myHelper.SubjectCreationHelper;
 import com.ort.ortnct.service.SubjectCreationRequestService;
 //import com.ort.ortnct.util.ConverterService;
-import com.ort.ortnct.util.ConverterService;
+//import com.ort.ortnct.util.ConverterService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,15 +17,15 @@ import org.springframework.web.bind.annotation.RestController;
 import javax.validation.Valid;
 
 @RestController
-@CrossOrigin
+@CrossOrigin(origins = "*")
 @Api(value = "Subject,test,question,answers", description = "REST API for Subject", tags = { "Subject" })
 public class SubjectCreationRequestController
 {
     @Autowired
     SubjectCreationRequestService subjectCreationRequestService;
 
-    @Autowired
-    ConverterService converterService;
+//    @Autowired
+//    ConverterService converterService;
 
     //ADD FINAL TEST ORT
     @ApiOperation(value="Create ORT final test", tags = { "Subject" })
@@ -43,7 +43,7 @@ public class SubjectCreationRequestController
         return subjectCreationRequestService.addSubjectTestORT(subjectCreationHelper);
     }
 
-//    //Using MODEL MAPPER
+    //Using MODEL MAPPER
 //    @ApiOperation(value="Create ORT final test", tags = { "Subject" })
 //    @PostMapping("/subjectCreationRequestOFMAP")
 //    public Subject subjectCreationRequestORTFinalMAPPER(@RequestBody SubjectDto subjectDto)
