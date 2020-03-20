@@ -14,9 +14,6 @@ public class TestService
 
     public Test createTestInDB(Test test)
     {
-//        Test test = new Test();
-//        test.setSubject(subject);
-
         return testRepository.save(test);
     }
 
@@ -25,6 +22,7 @@ public class TestService
         Test test1 = testRepository.findById(test.getId()).
                 map(e ->
                 {
+                    e.setName(test.getName());
                     e.setQuestion(test.getQuestion());
                     e.setSubject(test.getSubject());
                     e.setInstruction(test.getInstruction());

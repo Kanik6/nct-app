@@ -7,10 +7,12 @@ import com.ort.ortnct.enums.TestType;
 import com.ort.ortnct.exception.NoSuchSubCategoryException;
 import com.ort.ortnct.myHelper.SubjectCreationHelper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.i18n.LocaleContextHolder;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 
 @Service
 public class SubjectCreationRequestService
@@ -33,6 +35,13 @@ public class SubjectCreationRequestService
     // adding final test ORT
     public Subject addFinalTestORT(SubjectCreationHelper subjectCreationHelper)
     {
+        Locale currentLocale = LocaleContextHolder.getLocale();
+
+        System.out.println(currentLocale.getDisplayLanguage());
+        System.out.println(currentLocale.getDisplayCountry());
+
+        System.out.println(currentLocale.getLanguage());
+        System.out.println(currentLocale.getCountry());
         //--------------------------------WRAPPER_HELPER
         Subject subject = subjectCreationHelper.getSubject(); // name , subcategory(BASIC , ADDITIONAL)
         SubCategory subCategory = subjectCreationHelper.getSubCategory();

@@ -1,10 +1,8 @@
 package com.ort.ortnct.entity;
 
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
-import com.fasterxml.jackson.annotation.JsonIdentityReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
-import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiModel;
 
 import javax.persistence.*;
@@ -21,6 +19,9 @@ public class Test
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
+    @Column(name = "test_name")
+    private String name;
 
     @Column(name = "instruction")
     private String instruction;
@@ -44,8 +45,9 @@ public class Test
     {
     }
 
-    public Test(String instruction, Long qcount)
+    public Test(String name, String instruction, Long qcount)
     {
+        this.name = name;
         this.instruction = instruction;
         this.qcount = qcount;
     }
@@ -58,6 +60,16 @@ public class Test
     public String getInstruction()
     {
         return instruction;
+    }
+
+    public String getName()
+    {
+        return name;
+    }
+
+    public void setName(String name)
+    {
+        this.name = name;
     }
 
     public void setInstruction(String instruction)
@@ -115,6 +127,7 @@ public class Test
     {
         return "Test{" +
                 "id=" + id +
+                ", name='" + name + '\'' +
                 ", instruction='" + instruction + '\'' +
                 ", qcount=" + qcount +
                 ", subject=" + subject +
