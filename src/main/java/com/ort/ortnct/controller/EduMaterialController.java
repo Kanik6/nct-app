@@ -24,6 +24,13 @@ public class EduMaterialController
         return eduMaterialService.createEduMaterial(eduMaterial);
     }
 
+    @GetMapping("/eduMaterial/{id}")
+    @ApiOperation(value="get educational material by id", tags = { "educational material" })
+    public EduMaterial getEduMaterialById(@PathVariable("id") Long id)
+    {
+        return eduMaterialService.getEduMaterialById(id);
+    }
+
     @GetMapping("/eduMaterial")
     @ApiOperation(value="get all educational material", tags = { "educational material" })
     public List<EduMaterial> getListEduMat()

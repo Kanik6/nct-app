@@ -2,9 +2,12 @@ package com.ort.ortnct.service;
 
 import com.ort.ortnct.entity.Subject;
 import com.ort.ortnct.entity.Test;
+import com.ort.ortnct.exception.NoSubjectsFoundException;
 import com.ort.ortnct.repository.SubjectRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 @Service
 public class SubjectService
@@ -21,13 +24,6 @@ public class SubjectService
 
     }
 
-//    public Subject getSubjectByNameAndCategoryFromDBorCreate(Subject subject)
-//    {
-////        subject.getSubCategory().getSubCategoryName().name()
-//       return subjectRepository.findSubjectByNameAndSubCategory(subject.getName())
-//               .orElse(createSubjectInDB(subject));
-//    }
-
     public Subject updateSubject(Subject subject)
     {
         Subject subject1 = subjectRepository.findById(subject.getId()).
@@ -41,8 +37,22 @@ public class SubjectService
                 .orElseGet(() -> {return subjectRepository.save(subject);});
         return subject1;
     }
+    //=============================================
+    public List<Subject> getListSubjectOrtBasic()
+    {
+        return subjectRepository.findAllOrtFinalBasicSubjects().orElseThrow(() -> new NoSubjectsFoundException("No subjects found!"));
+    }
 
+    public List<Subject> getListSubjectOrtAdd()
+    {
+        return subjectRepository.findAllOrtFinalAddSubjects().orElseThrow(() -> new NoSubjectsFoundException("No subjects found!"));
+    }
 
+    public List<Subject> getListSubjectOrt()
+    {
+        return subjectRepository.findAllOrtSubjects().orElseThrow(() -> new NoSubjectsFoundException("No subjects found!"));
+    }
+    //=============================================
     public Subject findSubjectByNameAndSubcategory(Subject subject)
     {
         return subjectRepository.findSubjectByNameAndSubCategory(subject.getName(),

@@ -18,7 +18,7 @@ import javax.validation.Valid;
 
 @RestController
 @CrossOrigin(origins = "*")
-@Api(value = "Subject,test,question,answers", description = "REST API for Subject", tags = { "Subject" })
+@Api(value = "Subject,test,question,answers", description = "REST API for create request Subject", tags = { "Create Subject,test,question,answer request" })
 public class SubjectCreationRequestController
 {
     @Autowired
@@ -28,7 +28,7 @@ public class SubjectCreationRequestController
 //    ConverterService converterService;
 
     //ADD FINAL TEST ORT
-    @ApiOperation(value="Create ORT final test", tags = { "Subject" })
+    @ApiOperation(value="Create ORT final test", tags = { "Create Subject,test,question,answer request" })
     @PostMapping("/subject/ort/final")
     public Subject subjectCreationRequestORTFinal(@RequestBody SubjectCreationHelper subjectCreationHelper)
     {
@@ -36,7 +36,7 @@ public class SubjectCreationRequestController
     }
 
     //ADD SUBJECT TEST ORT
-    @ApiOperation(value="Create ORT subject test", tags = { "Subject" })
+    @ApiOperation(value="Create ORT subject test", tags = { "Create Subject,test,question,answer request" })
     @PostMapping("/subject/ort/subject")
     public Subject subjectCreationRequestORTSubject(@RequestBody SubjectCreationHelper subjectCreationHelper)
     {

@@ -1,6 +1,7 @@
 package com.ort.ortnct.service;
 
 import com.ort.ortnct.entity.EduMaterial;
+import com.ort.ortnct.exception.NoSuchEduMaterialException;
 import com.ort.ortnct.repository.EduMaterialRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.i18n.LocaleContextHolder;
@@ -31,6 +32,11 @@ public class EduMaterialService
     public List<EduMaterial> getListEduMaterial()
     {
         return eduMaterialRepository.findAll();
+    }
+
+    public EduMaterial getEduMaterialById(Long id)
+    {
+        return eduMaterialRepository.findById(id).orElseThrow(() -> new NoSuchEduMaterialException("No such educational material"));
     }
     //==================================UPDATE
     public EduMaterial updateEduMaterial(EduMaterial eduMaterial, Long id)

@@ -52,6 +52,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter
                 .antMatchers(HttpMethod.POST,"/user").permitAll()
                 .antMatchers(HttpMethod.POST,"/subject/ort/final").permitAll()
                 .antMatchers(HttpMethod.GET,"/eduMaterial").permitAll()
+                .antMatchers(HttpMethod.GET,"/eduMaterial/{id}").permitAll()
                 .antMatchers(HttpMethod.DELETE,"/eduMaterial").permitAll()
                 .antMatchers(HttpMethod.PUT,"/eduMaterial").permitAll()
                 .antMatchers(HttpMethod.POST,"/eduMaterial").permitAll()
@@ -65,7 +66,11 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter
                 .antMatchers(HttpMethod.GET,"/testResult").permitAll()
                 .antMatchers(HttpMethod.DELETE,"/testResult").permitAll()
                 .antMatchers(HttpMethod.PUT,"/testResult").permitAll()
-                .antMatchers(HttpMethod.POST,"/testResult").permitAll();
+                .antMatchers(HttpMethod.POST,"/testResult").permitAll()
+                    //subject
+                .antMatchers(HttpMethod.GET,"/subjectListOrtBasic").permitAll()
+                .antMatchers(HttpMethod.GET,"/subjectListOrtAdd").permitAll()
+                .antMatchers(HttpMethod.GET,"/subjectListOrtSubjects").permitAll();
 
 
         List<View> views = viewRepository.findAll();
