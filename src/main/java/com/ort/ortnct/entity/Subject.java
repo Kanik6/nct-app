@@ -40,7 +40,7 @@ public class Subject
 
     @OneToOne(mappedBy = "subject", cascade = CascadeType.ALL)
     @ApiModelProperty(position = 3)
-    @JsonIgnore
+//    @JsonIgnore
     private Test test;
 
     @Column(name = "test_type")

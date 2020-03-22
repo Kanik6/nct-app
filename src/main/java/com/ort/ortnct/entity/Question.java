@@ -33,7 +33,7 @@ public class Question
             joinColumns = @JoinColumn(name = "question_id"))
     private Test test;
 
-    @JsonIgnore
+//    @JsonIgnore
     @OneToMany(mappedBy = "question", cascade = CascadeType.ALL)
     private List<Answer> answer;
 

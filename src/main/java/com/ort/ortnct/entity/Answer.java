@@ -13,7 +13,7 @@ import javax.validation.constraints.NotBlank;
 @Table(name = "answers")
 @ApiModel(value = "answer model")
 @JsonIdentityInfo(generator= ObjectIdGenerators.PropertyGenerator.class, property="id")
-@JsonIdentityReference(alwaysAsId = true)
+//@JsonIdentityReference(alwaysAsId = true)
 public class Answer
 {
     @Column(name = "answer_id")
