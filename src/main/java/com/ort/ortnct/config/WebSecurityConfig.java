@@ -51,6 +51,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter
                         "/webjars/**").permitAll()
                 .antMatchers(HttpMethod.POST,"/user").permitAll()
                 .antMatchers(HttpMethod.POST,"/subject/ort/final").permitAll()
+                .antMatchers(HttpMethod.POST,"/subject/ort/subject").permitAll()
                 .antMatchers(HttpMethod.GET,"/eduMaterial").permitAll()
                 .antMatchers(HttpMethod.GET,"/eduMaterial/{id}").permitAll()
                 .antMatchers(HttpMethod.DELETE,"/eduMaterial").permitAll()
