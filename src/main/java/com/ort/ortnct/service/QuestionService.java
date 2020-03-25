@@ -22,6 +22,7 @@ public class QuestionService
                 map(e ->
                 {
                     e.setAnswer(question.getAnswer());
+                    e.setExplanation(question.getExplanation());
                     e.setTest(question.getTest());
                     e.setQuestion(question.getQuestion());
                     return questionRepository.save(e);

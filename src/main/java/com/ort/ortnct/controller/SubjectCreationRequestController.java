@@ -1,8 +1,10 @@
 package com.ort.ortnct.controller;
 
-import com.ort.ortnct.dto.SubjectDto;
+import com.ort.ortnct.dto.CreateRequestDto;
+import com.ort.ortnct.entity.Answer;
 import com.ort.ortnct.entity.Subject;
 import com.ort.ortnct.myHelper.SubjectCreationHelper;
+import com.ort.ortnct.service.AnswerService;
 import com.ort.ortnct.service.SubjectCreationRequestService;
 //import com.ort.ortnct.util.ConverterService;
 //import com.ort.ortnct.util.ConverterService;
@@ -15,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.validation.Valid;
+import java.util.List;
 
 @RestController
 @CrossOrigin(origins = "*")
@@ -24,8 +27,6 @@ public class SubjectCreationRequestController
     @Autowired
     SubjectCreationRequestService subjectCreationRequestService;
 
-//    @Autowired
-//    ConverterService converterService;
 
     //ADD FINAL TEST ORT
     @ApiOperation(value="Create ORT final test", tags = { "Create Request Subject" })
@@ -44,13 +45,11 @@ public class SubjectCreationRequestController
 
     }
 
-    //Using MODEL MAPPER
-//    @ApiOperation(value="Create ORT final test", tags = { "Subject" })
-//    @PostMapping("/subjectCreationRequestOFMAP")
-//    public Subject subjectCreationRequestORTFinalMAPPER(@RequestBody SubjectDto subjectDto)
-//    {
-//        Subject subject = converterService.convertToEnity(subjectDto);
-//
-//        return subjectCreationRequestService.addFinalTestORTMAPPER(subject);
-//    }
+//    Using MODEL MAPPER
+    @ApiOperation(value="Create ORT final test", tags = { "Subject" })
+    @PostMapping("/subjectCreationRequestOFMAP")
+    public Subject subjectCreationRequestORTFinalMAPPER(@RequestBody CreateRequestDto createRequestDto)
+    {
+        return subjectCreationRequestService.addFinalTestORTMAPPER(createRequestDto);
+    }
 }

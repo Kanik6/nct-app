@@ -1,18 +1,22 @@
 package com.ort.ortnct.service;
 
 import com.google.common.collect.Iterables;
+import com.ort.ortnct.dto.CreateRequestDto;
 import com.ort.ortnct.entity.*;
 import com.ort.ortnct.enums.SubCategories;
 import com.ort.ortnct.enums.TestType;
 import com.ort.ortnct.exception.NoSuchSubCategoryException;
 import com.ort.ortnct.myHelper.SubjectCreationHelper;
+import com.ort.ortnct.util.ConverterService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.i18n.LocaleContextHolder;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Locale;
+import java.util.stream.Collectors;
 
 @Service
 public class SubjectCreationRequestService
@@ -31,6 +35,9 @@ public class SubjectCreationRequestService
 
     @Autowired
     TestService testService;
+
+    @Autowired
+    ConverterService converterService;
 
     // adding final test ORT
     public Subject addFinalTestORT(SubjectCreationHelper subjectCreationHelper)
@@ -82,6 +89,8 @@ public class SubjectCreationRequestService
                 testService.updateTestInDB(test1);
                 // updating question mapping question answers
                 question1.setAnswer(answers1);
+
+                question1.setCorrentAnswer(answers1.stream().filter(e -> e.getCorrect() == true).findFirst().get());
                 questionService.updateQuestionInDB(question1);
                 return subject2;
 
@@ -98,6 +107,7 @@ public class SubjectCreationRequestService
             testService.updateTestInDB(subject1.getTest());
             // updating question mapping question answers
             question1.setAnswer(answers1);
+            question1.setCorrentAnswer(answers1.stream().filter(e -> e.getCorrect() == true).findFirst().get());
             questionService.updateQuestionInDB(question1);
             return subject1;
         }
@@ -114,6 +124,7 @@ public class SubjectCreationRequestService
         Test test = subjectCreationHelper.getTest(); // instruction
         Question question = subjectCreationHelper.getQuestion(); //question
         List<Answer> answers = subjectCreationHelper.getAnswers(); //list answers
+
         //--------------------------------CREATION IN DB-----------------------------------------
         SubCategory subCategory = new SubCategory();
         subCategory.setSubCategoryName(SubCategories.ORT_SUB);
@@ -148,6 +159,7 @@ public class SubjectCreationRequestService
                 testService.updateTestInDB(test1);
                 // updating question mapping question answers
                 question1.setAnswer(answers1);
+                question1.setCorrentAnswer(answers1.stream().filter(e -> e.getCorrect() == true).findFirst().get());
                 questionService.updateQuestionInDB(question1);
                 return subject2;
 
@@ -164,24 +176,22 @@ public class SubjectCreationRequestService
             testService.updateTestInDB(subject1.getTest());
             // updating question mapping question answers
             question1.setAnswer(answers1);
+            question1.setCorrentAnswer(answers1.stream().filter(e -> e.getCorrect() == true).findFirst().get());
             questionService.updateQuestionInDB(question1);
             return subject1;
 
     }
-    public Subject addFinalTestORTMAPPER(Subject subject)
+
+    //========================================MAPPER ORT FINAL
+    public Subject addFinalTestORTMAPPER(CreateRequestDto createRequestDto)
     {
-//        List<Answer> answers = new ArrayList<>();
-//        subject.getTest().getQuestion().stream().findFirst().map(e -> answers.add(e.getAnswer().stream().findFirst().get()));
-//        System.out.println(subject.getName());
-//        System.out.println(subject.getTest().getInstruction());
-//        System.out.println(subject.getTest().getQuestion().stream().findFirst().get().getQuestion());
-//        answers.stream().forEach(e -> System.out.println(e.getAnswer()));
-        //--------------------------------WRAPPER_HELPER
+        Subject subject = converterService.convertToEntity(createRequestDto);
+//        List<Object> requestObj = converterService.convertToEntity(createRequestDto);
+         //--------------------------------WRAPPER_HELPER
          // name , subcategory(BASIC , ADDITIONAL)
         SubCategory subCategory = subject.getSubCategory();
         Test test = subject.getTest(); // instruction
-        List<Question> questions = subject.getTest().getQuestion();
-        Question question = Iterables.getLast(questions);
+        Question question = subject.getTest().getQuestion().stream().findFirst().get();
         List<Answer> answers = question.getAnswer(); //list answers
         //--------------------------------CREATION IN DB-----------------------------------------
 
@@ -206,9 +216,9 @@ public class SubjectCreationRequestService
                 question.setTest(test1);
                 Question question1 = questionService.createQuestionInDB(question);
                 // mapping answers to question AND creating in db
-                answers.stream().forEach(e -> e.setQuestion(question1));
+                answers.forEach(e -> e.setQuestion(question1));
                 List<Answer> answers1 = answerService.createAnswerInDB(answers);
-                //-------------------------updating
+                        //-------------------------updating
                 // updating subject mapping to test
                 subject1.setTest(test1);
                 Subject subject2 = subjectService.updateSubject(subject1);
@@ -225,7 +235,8 @@ public class SubjectCreationRequestService
             question.setTest(subject1.getTest());
             Question question1 = questionService.createQuestionInDB(question);
             // mapping answers to question AND creating in db
-            answers.stream().forEach(e -> e.setQuestion(question1));
+            answers.forEach(e -> e.setQuestion(question1));
+
             List<Answer> answers1 = answerService.createAnswerInDB(answers);
             //-------------------------updating
             // updating test mapping test question

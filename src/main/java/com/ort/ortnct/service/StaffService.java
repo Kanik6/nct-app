@@ -1,10 +1,12 @@
 package com.ort.ortnct.service;
 
+import com.ort.ortnct.dto.StaffDto;
 import com.ort.ortnct.entity.Role;
 import com.ort.ortnct.entity.Staff;
 import com.ort.ortnct.exception.NoSuchRoleException;
 import com.ort.ortnct.repository.RoleRepository;
 import com.ort.ortnct.repository.StaffRepository;
+import com.ort.ortnct.util.ConverterService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.userdetails.User;
@@ -18,6 +20,7 @@ import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 @Service
 public class StaffService implements UserDetailsService
@@ -34,32 +37,40 @@ public class StaffService implements UserDetailsService
     @Autowired
     RoleRepository roleRepository;
 
+    @Autowired
+    ConverterService converterService;
+
     //==============================================================CREATE
-    public Staff createStaffInDB(Staff staff, Authentication authentication)
+    public StaffDto createStaffInDB(StaffDto staffDto, Authentication authentication)
     {
         Staff currentStaff = getCurrentStaff.getCurrentStaff(authentication);
+
+        Staff staff = converterService.convertToEntity(staffDto);
         staff.setRelatedCategory(currentStaff.getRelatedCategory());
 
         Role role = roleRepository.findByName(staff.getPosition()).orElseThrow(() -> new NoSuchRoleException("There is no role:"+staff.getPosition()));
         Set<Role> roles = new HashSet<>();
         roles.add(role);
         staff.setRoles(roles);
-        return staffRepository.save(staff);
+
+        return converterService.convertToDto(staffRepository.save(staff));
     }
     //==============================================================READ
-    public List<Staff> getListStaffFromDB()
+    public List<StaffDto> getListStaffFromDB()
     {
-        return staffRepository.findAll();
+        return staffRepository.findAll().stream().map(converterService::convertToDto).collect(Collectors.toList());
     }
 
     //==============================================================UPDATE
-    public Staff updateStaffInDB(Staff staff, Long id, Authentication authentication)
+    public StaffDto updateStaffInDB(StaffDto staffDto, Long id, Authentication authentication)
     {
         Staff currentStaff = getCurrentStaff.getCurrentStaff(authentication);
+        Staff staff = converterService.convertToEntity(staffDto);
+
         Role role = roleRepository.findByName(staff.getPosition()).orElseThrow(() -> new NoSuchRoleException("There is no role:"+staff.getPosition()));
         Set<Role> roles = new HashSet<>();
         roles.add(role);
-        Staff staff1 = staffRepository.findById(id)
+        StaffDto staff1 = staffRepository.findById(id)
                 .map(e ->
                 {
                     e.setLogin(staff.getLogin());
@@ -73,9 +84,12 @@ public class StaffService implements UserDetailsService
                     e.setPosition(staff.getPosition());
                     e.setRelatedCategory(currentStaff.getRelatedCategory());
                     e.setRoles(roles);
-                    return staffRepository.save(e);
+                    return converterService.convertToDto(staffRepository.save(e));
                 })
-                .orElseGet(() -> {return staffRepository.save(staff);});
+                .orElseGet(() ->
+                {
+                    return converterService.convertToDto(staffRepository.save(staff));
+                });
         return staff1;
     }
     //==============================================================DELETE

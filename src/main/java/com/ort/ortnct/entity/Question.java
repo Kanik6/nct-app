@@ -26,6 +26,9 @@ public class Question
     @NotBlank(message = "Question is mandatory!")
     private String question;
 
+    @Column(name = "explanation")
+    private String explanation;
+
     @JsonIgnore
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinTable(name = "test_questions",
@@ -37,13 +40,18 @@ public class Question
     @OneToMany(mappedBy = "question", cascade = CascadeType.ALL)
     private List<Answer> answer;
 
+    @OneToOne
+    @JoinColumn(name = "corrent_answer_for_question")
+    private Answer correctAnswer;
+
     public Question()
     {
     }
 
-    public Question(String question)
+    public Question(String question , String explanation)
     {
         this.question = question;
+        this.explanation = explanation;
     }
 
     public Long getId()
@@ -59,6 +67,16 @@ public class Question
     public void setQuestion(String question)
     {
         this.question = question;
+    }
+
+    public String getExplanation()
+    {
+        return explanation;
+    }
+
+    public void setExplanation(String explanation)
+    {
+        this.explanation = explanation;
     }
 
     public Test getTest()
@@ -81,14 +99,26 @@ public class Question
         this.answer = answer;
     }
 
+    public Answer getCorrentAnswer()
+    {
+        return correctAnswer;
+    }
+
+    public void setCorrentAnswer(Answer correntAnswer)
+    {
+        this.correctAnswer = correntAnswer;
+    }
+
     @Override
     public String toString()
     {
         return "Question{" +
                 "id=" + id +
                 ", question='" + question + '\'' +
+                ", explanation='" + explanation + '\'' +
                 ", test=" + test +
                 ", answer=" + answer +
+                ", correctAnswer=" + correctAnswer +
                 '}';
     }
 }

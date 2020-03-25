@@ -9,9 +9,10 @@ import io.swagger.annotations.ApiModelProperty;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
+import java.util.ArrayList;
 import java.util.List;
 
-public class SubjectDto
+public class CreateRequestDto
 {
     private Long id;
 
@@ -29,11 +30,11 @@ public class SubjectDto
 //    private TestType testType;
     private String testType;
 
-    public SubjectDto()
+    public CreateRequestDto()
     {
     }
 
-    public SubjectDto(Long id, String name, String subCategoryName, String instruction,  String question, List<Answer> answers, String testType)
+    public CreateRequestDto(Long id, String name, String subCategoryName, String instruction,  String question, List<Answer> answers, String testType)
     {
         this.id = id;
         this.name = name;

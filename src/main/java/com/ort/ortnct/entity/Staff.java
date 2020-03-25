@@ -72,7 +72,6 @@ public class Staff
     @ApiModelProperty(notes = "position of the staff , ADMIN or EDITOR", position = 9)
     private String position;
 
-    @JsonIgnore
     @Column(name = "related_category")
     @ApiModelProperty(notes = "related category ORT or NCT")
     private String relatedCategory;

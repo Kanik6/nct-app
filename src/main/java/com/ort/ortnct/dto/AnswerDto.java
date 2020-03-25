@@ -12,7 +12,7 @@ public class AnswerDto
 
     private String answer;
 
-    private Boolean isCorrect = false;
+    private Boolean isCorrect;
 
     private Question question;
 }

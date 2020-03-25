@@ -9,9 +9,12 @@ import com.ort.ortnct.enums.TestType;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import org.hibernate.validator.constraints.UniqueElements;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
+import java.time.LocalDate;
 
 @Entity
 @Table(name = "subjects")
@@ -29,6 +32,10 @@ public class Subject
     @NotBlank(message = "subject name is mandatory!")
     @ApiModelProperty(position = 1)
     private String name;
+
+    @Column(name = "creation_date")
+    @DateTimeFormat(style = "yyyy-MM-dd")
+    private LocalDate creationDate = LocalDate.now();
 
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinTable(name = "subject_sub_category",
@@ -94,6 +101,11 @@ public class Subject
         this.test = test;
     }
 
+    public LocalDate getCreationDate()
+    {
+        return creationDate;
+    }
+
     public TestType getTestType()
     {
         return testType;
@@ -110,6 +122,7 @@ public class Subject
         return "Subject{" +
                 "id=" + id +
                 ", name='" + name + '\'' +
+                ", creationDate=" + creationDate +
                 ", subCategory=" + subCategory +
                 ", test=" + test +
                 ", testType=" + testType +

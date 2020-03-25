@@ -29,8 +29,9 @@ public class StaffDto
 
     private String position;
 
+    @JsonIgnore
     private String relatedCategory;
-
+    @JsonIgnore
     private Set<Role> roles;
 
     public StaffDto()

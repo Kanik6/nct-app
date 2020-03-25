@@ -26,7 +26,7 @@ public class Answer
     private String answer;
 
     @Column(name = "is_correct")
-    private Boolean isCorrect = false;
+    private boolean isCorrect;
 
     @JsonIgnore
     @ManyToOne(cascade = CascadeType.ALL)
@@ -35,11 +35,15 @@ public class Answer
             joinColumns = @JoinColumn(name = "answer_id"))
     private Question question;
 
+    @JsonIgnore
+    @OneToOne(mappedBy = "correctAnswer")
+    private Question forQues;
+
     public Answer()
     {
     }
 
-    public Answer(String answer, Boolean isCorrect)
+    public Answer(String answer, boolean isCorrect)
     {
         this.answer = answer;
         this.isCorrect = isCorrect;
@@ -60,12 +64,12 @@ public class Answer
         this.answer = answer;
     }
 
-    public Boolean getCorrect()
+    public boolean getCorrect()
     {
         return isCorrect;
     }
 
-    public void setCorrect(Boolean correct)
+    public void setCorrect(boolean correct)
     {
         isCorrect = correct;
     }
@@ -80,6 +84,16 @@ public class Answer
         this.question = question;
     }
 
+    public Question getForQues()
+    {
+        return forQues;
+    }
+
+    public void setForQues(Question forQues)
+    {
+        this.forQues = forQues;
+    }
+
     @Override
     public String toString()
     {
@@ -88,6 +102,7 @@ public class Answer
                 ", answer='" + answer + '\'' +
                 ", isCorrect=" + isCorrect +
                 ", question=" + question +
+                ", forQues=" + forQues +
                 '}';
     }
 }

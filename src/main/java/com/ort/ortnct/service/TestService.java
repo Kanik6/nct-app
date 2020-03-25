@@ -25,6 +25,7 @@ public class TestService
                     e.setName(test.getName());
                     e.setQuestion(test.getQuestion());
                     e.setSubject(test.getSubject());
+                    e.setSubjectName(test.getSubjectName());
                     e.setInstruction(test.getInstruction());
                     e.setQcount(test.getQcount());
                     return testRepository.save(e);

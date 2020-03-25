@@ -13,6 +13,11 @@ public class AnswerService
     @Autowired
     AnswerRepository answerRepository;
 
+    public Answer createOneAnswer(Answer answer)
+    {
+        return answerRepository.save(answer);
+    }
+
     public List<Answer> createAnswerInDB(List<Answer> answers)
     {
         return answerRepository.saveAll(answers);
