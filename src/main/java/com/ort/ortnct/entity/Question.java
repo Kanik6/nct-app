@@ -41,7 +41,7 @@ public class Question
     private List<Answer> answer;
 
     @OneToOne
-    @JoinColumn(name = "corrent_answer_for_question")
+    @JoinColumn(name = "correct_answer_for_question")
     private Answer correctAnswer;
 
     public Question()

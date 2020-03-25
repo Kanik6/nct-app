@@ -34,9 +34,6 @@ public class Test
     @JoinColumn(name = "subject_id")
     private Subject subject;
 
-    @Column(name = "subject_name")
-    private String subjectName;
-
     @OneToMany(mappedBy = "test")
     private List<Question> question = new ArrayList<>();
 
@@ -48,12 +45,11 @@ public class Test
     {
     }
 
-    public Test(String name, String instruction, Long qcount, String subjectName)
+    public Test(String name, String instruction, Long qcount)
     {
         this.name = name;
         this.instruction = instruction;
         this.qcount = qcount;
-        this.subjectName = subjectName;
     }
 
     public Long getId()
@@ -116,16 +112,6 @@ public class Test
         this.question.add(question);
     }
 
-    public String getSubjectName()
-    {
-        return subjectName;
-    }
-
-    public void setSubjectName(String subjectName)
-    {
-        this.subjectName = subjectName;
-    }
-
     public List<TestResult> getTestResult()
     {
         return testResult;
@@ -145,7 +131,6 @@ public class Test
                 ", instruction='" + instruction + '\'' +
                 ", qcount=" + qcount +
                 ", subject=" + subject +
-                ", subjectName='" + subjectName + '\'' +
                 ", question=" + question +
                 ", testResult=" + testResult +
                 '}';
