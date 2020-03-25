@@ -46,10 +46,10 @@ public class SubjectCreationRequestController
     }
 
 //    Using MODEL MAPPER
-    @ApiOperation(value="Create ORT final test", tags = { "Subject" })
-    @PostMapping("/subjectCreationRequestOFMAP")
-    public Subject subjectCreationRequestORTFinalMAPPER(@RequestBody CreateRequestDto createRequestDto)
-    {
-        return subjectCreationRequestService.addFinalTestORTMAPPER(createRequestDto);
-    }
+//    @ApiOperation(value="Create ORT final test", tags = { "Subject" })
+//    @PostMapping("/subjectCreationRequestOFMAP")
+//    public Subject subjectCreationRequestORTFinalMAPPER(@RequestBody CreateRequestDto createRequestDto)
+//    {
+//        return subjectCreationRequestService.addFinalTestORTMAPPER(createRequestDto);
+//    }
 }
