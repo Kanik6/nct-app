@@ -99,14 +99,14 @@ public class Question
         this.answer = answer;
     }
 
-    public Answer getCorrentAnswer()
+    public Answer getCorrectAnswer()
     {
         return correctAnswer;
     }
 
-    public void setCorrentAnswer(Answer correntAnswer)
+    public void setCorrectAnswer(Answer correctAnswer)
     {
-        this.correctAnswer = correntAnswer;
+        this.correctAnswer = correctAnswer;
     }
 
     @Override

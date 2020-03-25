@@ -90,7 +90,7 @@ public class SubjectCreationRequestService
                 // updating question mapping question answers
                 question1.setAnswer(answers1);
 
-                question1.setCorrentAnswer(answers1.stream().filter(e -> e.getCorrect() == true).findFirst().get());
+                question1.setCorrectAnswer(answers1.stream().filter(e -> e.getCorrect() == true).findFirst().get());
                 questionService.updateQuestionInDB(question1);
                 return subject2;
 
@@ -107,7 +107,7 @@ public class SubjectCreationRequestService
             testService.updateTestInDB(subject1.getTest());
             // updating question mapping question answers
             question1.setAnswer(answers1);
-            question1.setCorrentAnswer(answers1.stream().filter(e -> e.getCorrect() == true).findFirst().get());
+            question1.setCorrectAnswer(answers1.stream().filter(e -> e.getCorrect() == true).findFirst().get());
             questionService.updateQuestionInDB(question1);
             return subject1;
         }
@@ -159,7 +159,7 @@ public class SubjectCreationRequestService
                 testService.updateTestInDB(test1);
                 // updating question mapping question answers
                 question1.setAnswer(answers1);
-                question1.setCorrentAnswer(answers1.stream().filter(e -> e.getCorrect() == true).findFirst().get());
+                question1.setCorrectAnswer(answers1.stream().filter(e -> e.getCorrect() == true).findFirst().get());
                 questionService.updateQuestionInDB(question1);
                 return subject2;
 
@@ -176,7 +176,7 @@ public class SubjectCreationRequestService
             testService.updateTestInDB(subject1.getTest());
             // updating question mapping question answers
             question1.setAnswer(answers1);
-            question1.setCorrentAnswer(answers1.stream().filter(e -> e.getCorrect() == true).findFirst().get());
+            question1.setCorrectAnswer(answers1.stream().filter(e -> e.getCorrect() == true).findFirst().get());
             questionService.updateQuestionInDB(question1);
             return subject1;
 
