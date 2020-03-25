@@ -28,7 +28,7 @@ public class Subject
     @ApiModelProperty(position = 0)
     private Long id;
 
-    @Column(name = "subject_name", unique = true)
+    @Column(name = "subject_name")
     @NotBlank(message = "subject name is mandatory!")
     @ApiModelProperty(position = 1)
     private String name;
