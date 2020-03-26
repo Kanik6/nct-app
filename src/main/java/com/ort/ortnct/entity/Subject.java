@@ -124,6 +124,7 @@ public class Subject
         this.question = question;
     }
 
+    @JsonIgnore
     public void setOneQuestion(Question question)
     {
         this.question.add(question);
