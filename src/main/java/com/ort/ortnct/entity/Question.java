@@ -31,18 +31,14 @@ public class Question
 
     @JsonIgnore
     @ManyToOne(cascade = CascadeType.ALL)
-    @JoinTable(name = "test_questions",
-            inverseJoinColumns = @JoinColumn(name = "test_id"),
+    @JoinTable(name = "subject_questions",
+            inverseJoinColumns = @JoinColumn(name = "subject_id"),
             joinColumns = @JoinColumn(name = "question_id"))
-    private Test test;
+    private Subject subject;
 
 //    @JsonIgnore
     @OneToMany(mappedBy = "question", cascade = CascadeType.ALL)
     private List<Answer> answer;
-
-    @OneToOne
-    @JoinColumn(name = "correct_answer_for_question")
-    private Answer correctAnswer;
 
     public Question()
     {
@@ -79,14 +75,14 @@ public class Question
         this.explanation = explanation;
     }
 
-    public Test getTest()
+    public Subject getSubject()
     {
-        return test;
+        return subject;
     }
 
-    public void setTest(Test test)
+    public void setSubject(Subject subject)
     {
-        this.test = test;
+        this.subject = subject;
     }
 
     public List<Answer> getAnswer()
@@ -99,16 +95,6 @@ public class Question
         this.answer = answer;
     }
 
-    public Answer getCorrectAnswer()
-    {
-        return correctAnswer;
-    }
-
-    public void setCorrectAnswer(Answer correctAnswer)
-    {
-        this.correctAnswer = correctAnswer;
-    }
-
     @Override
     public String toString()
     {
@@ -116,9 +102,8 @@ public class Question
                 "id=" + id +
                 ", question='" + question + '\'' +
                 ", explanation='" + explanation + '\'' +
-                ", test=" + test +
+                ", subject=" + subject +
                 ", answer=" + answer +
-                ", correctAnswer=" + correctAnswer +
                 '}';
     }
 }

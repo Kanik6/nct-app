@@ -1,7 +1,6 @@
 package com.ort.ortnct.service;
 
 import com.ort.ortnct.entity.Subject;
-import com.ort.ortnct.entity.Test;
 import com.ort.ortnct.exception.NoSubjectsFoundException;
 import com.ort.ortnct.repository.SubjectRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,9 +13,6 @@ public class SubjectService
 {
     @Autowired
     SubjectRepository subjectRepository;
-
-    @Autowired
-    TestService testService;
 
     public Subject createSubjectInDB(Subject subject)
     {
@@ -31,7 +27,7 @@ public class SubjectService
                 {
                     e.setName(subject.getName());
                     e.setSubCategory(subject.getSubCategory());
-                    e.setTest(subject.getTest());
+                    e.setInstruction(subject.getInstruction());
                     return subjectRepository.save(e);
                 })
                 .orElseGet(() -> {return subjectRepository.save(subject);});

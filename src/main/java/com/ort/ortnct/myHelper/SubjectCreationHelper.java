@@ -10,19 +10,17 @@ public class SubjectCreationHelper
     private Subject subject;
     private Question question;
     private List<Answer> answers;
-    private Test test;
     private SubCategory subCategory;
 
     public SubjectCreationHelper()
     {
     }
 
-    public SubjectCreationHelper(Subject subject, Question question, List<Answer> answers, Test test, SubCategory subCategory)
+    public SubjectCreationHelper(Subject subject, Question question, List<Answer> answers, SubCategory subCategory)
     {
         this.subject = subject;
         this.question = question;
         this.answers = answers;
-        this.test = test;
         this.subCategory = subCategory;
     }
 
@@ -54,16 +52,6 @@ public class SubjectCreationHelper
     public void setAnswers(List<Answer> answers)
     {
         this.answers = answers;
-    }
-
-    public Test getTest()
-    {
-        return test;
-    }
-
-    public void setTest(Test test)
-    {
-        this.test = test;
     }
 
     public SubCategory getSubCategory()

@@ -35,19 +35,19 @@ public class TestResult
             inverseJoinColumns = @JoinColumn(name = "test_id"),
             joinColumns = @JoinColumn(name = "test_result_id"))
     @JoinColumn(name = "test_id")
-    private Test test;
+    private Subject subject;
 
     public TestResult()
     {
     }
 
-    public TestResult(Long corrent, Long incorrent, Long score, Usr usr, Test test)
+    public TestResult(Long corrent, Long incorrent, Long score, Usr usr, Subject subject)
     {
         this.corrent = corrent;
         this.incorrent = incorrent;
         this.score = score;
         this.usr = usr;
-        this.test = test;
+        this.subject = subject;
     }
 
     public Long getId()
@@ -95,14 +95,14 @@ public class TestResult
         this.usr = usr;
     }
 
-    public Test getTest()
+    public Subject getTest()
     {
-        return test;
+        return subject;
     }
 
-    public void setTest(Test test)
+    public void setTest(Subject subject)
     {
-        this.test = test;
+        this.subject = subject;
     }
 
     @Override
@@ -114,7 +114,7 @@ public class TestResult
                 ", incorrent=" + incorrent +
                 ", score=" + score +
                 ", usr=" + usr +
-                ", test=" + test +
+                ", subject=" + subject +
                 '}';
     }
 }

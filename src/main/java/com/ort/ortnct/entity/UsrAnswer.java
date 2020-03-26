@@ -27,8 +27,8 @@ public class UsrAnswer
     private Usr usrr;
 
     @OneToOne
-    @JoinColumn(name = "test_id")
-    private Test test;
+    @JoinColumn(name = "subject_id")
+    private Subject subject;
 
     @OneToOne
     @JoinColumn(name = "answer_id")
@@ -41,11 +41,11 @@ public class UsrAnswer
     {
     }
 
-    public UsrAnswer(Usr usr, Usr usrr, Test test, Answer answer)
+    public UsrAnswer(Usr usr, Usr usrr, Subject subject, Answer answer)
     {
         this.usr = usr;
         this.usrr = usrr;
-        this.test = test;
+        this.subject = subject;
         this.answer = answer;
     }
 
@@ -64,14 +64,14 @@ public class UsrAnswer
         this.usr = usr;
     }
 
-    public Test getTest()
+    public Subject getTest()
     {
-        return test;
+        return subject;
     }
 
-    public void setTest(Test test)
+    public void setTest(Subject subject)
     {
-        this.test = test;
+        this.subject = subject;
     }
 
     public Answer getAnswer()
@@ -101,7 +101,7 @@ public class UsrAnswer
                 "id=" + id +
                 ", usr=" + usr +
                 ", usrr=" + usrr +
-                ", test=" + test +
+                ", subject=" + subject +
                 ", answer=" + answer +
                 ", answerId=" + answerId +
                 '}';

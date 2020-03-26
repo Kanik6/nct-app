@@ -1,15 +1,7 @@
 package com.ort.ortnct.dto;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.ort.ortnct.entity.Answer;
-import com.ort.ortnct.entity.SubCategory;
-import com.ort.ortnct.entity.Test;
-import com.ort.ortnct.enums.TestType;
-import io.swagger.annotations.ApiModelProperty;
 
-import javax.persistence.*;
-import javax.validation.constraints.NotBlank;
-import java.util.ArrayList;
 import java.util.List;
 
 public class CreateRequestDto

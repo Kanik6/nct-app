@@ -23,7 +23,7 @@ public class QuestionService
                 {
                     e.setAnswer(question.getAnswer());
                     e.setExplanation(question.getExplanation());
-                    e.setTest(question.getTest());
+                    e.setSubject(question.getSubject());
                     e.setQuestion(question.getQuestion());
                     return questionRepository.save(e);
                 })

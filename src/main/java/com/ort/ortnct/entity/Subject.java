@@ -15,6 +15,8 @@ import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table(name = "subjects")
@@ -33,6 +35,16 @@ public class Subject
     @ApiModelProperty(position = 1)
     private String name;
 
+    @Column(name = "instruction")
+    private String instruction;
+
+    @OneToMany(mappedBy = "subject")
+    private List<Question> question = new ArrayList<>();
+
+    @JsonIgnore
+    @OneToMany(mappedBy = "subject")
+    private List<TestResult> testResult;
+
     @Column(name = "creation_date")
     @DateTimeFormat(style = "yyyy-MM-dd")
     private LocalDate creationDate = LocalDate.now();
@@ -45,11 +57,6 @@ public class Subject
     @JsonIgnore
     private SubCategory subCategory;
 
-    @OneToOne(mappedBy = "subject", cascade = CascadeType.ALL)
-    @ApiModelProperty(position = 3)
-//    @JsonIgnore
-    private Test test;
-
     @Column(name = "test_type")
     @Enumerated(EnumType.STRING)
     @ApiModelProperty(position = 4)
@@ -60,10 +67,11 @@ public class Subject
     {
     }
 
-    public Subject(String name, SubCategory subCategory)
+    public Subject(String name, SubCategory subCategory, String instruction)
     {
         this.name = name;
         this.subCategory = subCategory;
+        this.instruction = instruction;
     }
 
     public Long getId()
@@ -91,19 +99,44 @@ public class Subject
         this.subCategory = subCategory;
     }
 
-    public Test getTest()
+    public String getInstruction()
     {
-        return test;
+        return instruction;
     }
 
-    public void setTest(Test test)
+    public void setInstruction(String instruction)
     {
-        this.test = test;
+        this.instruction = instruction;
     }
 
     public LocalDate getCreationDate()
     {
         return creationDate;
+    }
+
+    public List<Question> getQuestion()
+    {
+        return question;
+    }
+
+    public void setQuestion(List<Question> question)
+    {
+        this.question = question;
+    }
+
+    public void setOneQuestion(Question question)
+    {
+        this.question.add(question);
+    }
+
+    public List<TestResult> getTestResult()
+    {
+        return testResult;
+    }
+
+    public void setTestResult(List<TestResult> testResult)
+    {
+        this.testResult = testResult;
     }
 
     public TestType getTestType()
@@ -122,9 +155,11 @@ public class Subject
         return "Subject{" +
                 "id=" + id +
                 ", name='" + name + '\'' +
+                ", instruction='" + instruction + '\'' +
+                ", question=" + question +
+                ", testResult=" + testResult +
                 ", creationDate=" + creationDate +
                 ", subCategory=" + subCategory +
-                ", test=" + test +
                 ", testType=" + testType +
                 '}';
     }

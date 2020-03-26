@@ -33,15 +33,13 @@ public class ConverterService
     {
         Subject subject = modelMapper.map(subjectDto, Subject.class);
         SubCategory subCategory = modelMapper.map(subjectDto, SubCategory.class);
-        Test test = modelMapper.map(subjectDto, Test.class);
         Question question = modelMapper.map(subjectDto, Question.class);
         List<Answer> answers = subjectDto.getAnswers().stream().map(e -> modelMapper.map(e, Answer.class)).collect(Collectors.toList());
 
         subject.setSubCategory(subCategory);
-        subject.setTest(test);
-        test.setSubject(subject);
-        test.setOneQuestion(question);
-        question.setTest(test);
+//        subject.setTest(test);
+//
+//        question.setTest(test);
         question.setAnswer(answers);
         answers.forEach(e -> e.setQuestion(question));
         return subject;

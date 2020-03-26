@@ -35,9 +35,6 @@ public class Answer
             joinColumns = @JoinColumn(name = "answer_id"))
     private Question question;
 
-    @JsonIgnore
-    @OneToOne(mappedBy = "correctAnswer")
-    private Question forQues;
 
     public Answer()
     {
@@ -84,16 +81,6 @@ public class Answer
         this.question = question;
     }
 
-    public Question getForQues()
-    {
-        return forQues;
-    }
-
-    public void setForQues(Question forQues)
-    {
-        this.forQues = forQues;
-    }
-
     @Override
     public String toString()
     {
@@ -102,7 +89,6 @@ public class Answer
                 ", answer='" + answer + '\'' +
                 ", isCorrect=" + isCorrect +
                 ", question=" + question +
-                ", forQues=" + forQues +
                 '}';
     }
 }
