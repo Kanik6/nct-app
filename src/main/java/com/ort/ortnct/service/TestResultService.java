@@ -33,8 +33,9 @@ public class TestResultService
                 .map(e ->
                 {
                     e.setScore(testResult.getScore());
-                    e.setCorrent(testResult.getCorrent());
-                    e.setIncorrent(testResult.getIncorrent());
+                    e.setCorrect(testResult.getCorrect());
+                    e.setIncorrect(testResult.getIncorrect());
+                    e.setSubject(testResult.getSubject());
                     return testResultRepository.save(e);
                 })
                 .orElseGet(() -> {return testResultRepository.save(testResult);});

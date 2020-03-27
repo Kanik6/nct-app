@@ -2,18 +2,15 @@ package com.ort.ortnct.entity;
 
 
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
-import com.fasterxml.jackson.annotation.JsonIdentityReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import com.ort.ortnct.enums.TestType;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
-import org.hibernate.validator.constraints.UniqueElements;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotNull;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
@@ -36,9 +33,11 @@ public class Subject
     private String name;
 
     @Column(name = "instruction")
+    @ApiModelProperty(position = 2)
     private String instruction;
 
     @OneToMany(mappedBy = "subject")
+    @ApiModelProperty(position = 5)
     private List<Question> question = new ArrayList<>();
 
     @JsonIgnore
@@ -47,6 +46,7 @@ public class Subject
 
     @Column(name = "creation_date")
     @DateTimeFormat(style = "yyyy-MM-dd")
+    @ApiModelProperty(position = 3)
     private LocalDate creationDate = LocalDate.now();
 
     @ManyToOne(cascade = CascadeType.ALL)
@@ -157,9 +157,9 @@ public class Subject
                 "id=" + id +
                 ", name='" + name + '\'' +
                 ", instruction='" + instruction + '\'' +
+                ", creationDate=" + creationDate +
                 ", question=" + question +
                 ", testResult=" + testResult +
-                ", creationDate=" + creationDate +
                 ", subCategory=" + subCategory +
                 ", testType=" + testType +
                 '}';

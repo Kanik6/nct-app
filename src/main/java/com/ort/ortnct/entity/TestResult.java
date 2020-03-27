@@ -17,10 +17,10 @@ public class TestResult
     private Long id;
 
     @Column(name = "correct")
-    private Long corrent;
+    private Long correct;
 
     @Column(name = "incorrect")
-    private Long incorrent;
+    private Long incorrect;
 
     @Column(name = "score")
     private Long score;
@@ -32,19 +32,19 @@ public class TestResult
     @JsonIgnore
     @ManyToOne
     @JoinTable(name = "test_results",
-            inverseJoinColumns = @JoinColumn(name = "test_id"),
-            joinColumns = @JoinColumn(name = "test_result_id"))
-    @JoinColumn(name = "test_id")
+            inverseJoinColumns = @JoinColumn(name = "subject_id"),
+            joinColumns = @JoinColumn(name = "subject_result_id"))
+    @JoinColumn(name = "subject_id")
     private Subject subject;
 
     public TestResult()
     {
     }
 
-    public TestResult(Long corrent, Long incorrent, Long score, Usr usr, Subject subject)
+    public TestResult(Long correct, Long incorrect, Long score, Usr usr, Subject subject)
     {
-        this.corrent = corrent;
-        this.incorrent = incorrent;
+        this.correct = correct;
+        this.incorrect = incorrect;
         this.score = score;
         this.usr = usr;
         this.subject = subject;
@@ -55,24 +55,24 @@ public class TestResult
         return id;
     }
 
-    public Long getCorrent()
+    public Long getCorrect()
     {
-        return corrent;
+        return correct;
     }
 
-    public void setCorrent(Long corrent)
+    public void setCorrect(Long corrent)
     {
-        this.corrent = corrent;
+        this.correct = correct;
     }
 
-    public Long getIncorrent()
+    public Long getIncorrect()
     {
-        return incorrent;
+        return incorrect;
     }
 
-    public void setIncorrent(Long incorrent)
+    public void setIncorrect(Long incorrect)
     {
-        this.incorrent = incorrent;
+        this.incorrect = incorrect;
     }
 
     public Long getScore()
@@ -95,12 +95,12 @@ public class TestResult
         this.usr = usr;
     }
 
-    public Subject getTest()
+    public Subject getSubject()
     {
         return subject;
     }
 
-    public void setTest(Subject subject)
+    public void setSubject(Subject subject)
     {
         this.subject = subject;
     }
@@ -110,8 +110,8 @@ public class TestResult
     {
         return "TestResult{" +
                 "id=" + id +
-                ", corrent=" + corrent +
-                ", incorrent=" + incorrent +
+                ", correct=" + correct +
+                ", incorrect=" + incorrect +
                 ", score=" + score +
                 ", usr=" + usr +
                 ", subject=" + subject +
