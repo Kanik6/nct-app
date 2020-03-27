@@ -49,6 +49,11 @@ public class SubjectService
         return subjectRepository.findAllOrtSubjects().orElseThrow(() -> new NoSubjectsFoundException("No subjects found!"));
     }
     //=============================================
+    public Subject findSubjectById(Long id)
+    {
+        return subjectRepository.findById(id).orElseThrow(() -> new NoSubjectsFoundException("No such subject!"));
+    }
+
     public Subject findSubjectByNameAndSubcategory(Subject subject)
     {
         return subjectRepository.findSubjectByNameAndSubCategory(subject.getName(),

@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.NoSuchElementException;
 
 @Service
 public class UsrService
@@ -23,6 +24,11 @@ public class UsrService
     public Boolean getUsr(String user_id)
     {
         return usrRepository.findById(user_id).isPresent();
+    }
+
+    public Usr getUsr1(String user_id)
+    {
+        return usrRepository.findById(user_id).orElseThrow(() -> new NoSuchElementException("No such user!"));
     }
 
     //==========================================Get User List
