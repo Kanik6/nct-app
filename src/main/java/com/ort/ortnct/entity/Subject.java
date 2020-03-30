@@ -2,7 +2,6 @@ package com.ort.ortnct.entity;
 
 
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
-import com.fasterxml.jackson.annotation.JsonIdentityReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import com.ort.ortnct.enums.TestType;
@@ -43,7 +42,7 @@ public class Subject
 
     @JsonIgnore
     @OneToMany(mappedBy = "subject")
-    private List<TestResult> testResult;
+    private List<TestResultNct> testResultNct;
 
     @Column(name = "creation_date")
     @DateTimeFormat(style = "yyyy-MM-dd")
@@ -131,14 +130,14 @@ public class Subject
         this.question.add(question);
     }
 
-    public List<TestResult> getTestResult()
+    public List<TestResultNct> getTestResultNct()
     {
-        return testResult;
+        return testResultNct;
     }
 
-    public void setTestResult(List<TestResult> testResult)
+    public void setTestResultNct(List<TestResultNct> testResultNct)
     {
-        this.testResult = testResult;
+        this.testResultNct = testResultNct;
     }
 
     public TestType getTestType()
@@ -160,7 +159,7 @@ public class Subject
                 ", instruction='" + instruction + '\'' +
                 ", creationDate=" + creationDate +
                 ", question=" + question +
-                ", testResult=" + testResult +
+                ", testResult=" + testResultNct +
                 ", subCategory=" + subCategory +
                 ", testType=" + testType +
                 '}';

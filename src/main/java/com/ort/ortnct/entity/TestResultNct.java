@@ -13,7 +13,7 @@ import javax.persistence.*;
 @Table(name = "test_result")
 @ApiModel(value = "test result model")
 @JsonIdentityInfo(generator= ObjectIdGenerators.PropertyGenerator.class, property="id")
-public class TestResult
+public class TestResultNct
 {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -25,9 +25,6 @@ public class TestResult
 
     @Column(name = "incorrect")
     private Long incorrect;
-
-    @Column(name = "score")
-    private Long score;
 
     @JsonIgnore
     @OneToOne
@@ -47,15 +44,14 @@ public class TestResult
     @Transient
     private Long subjectId;
 
-    public TestResult()
+    public TestResultNct()
     {
     }
 
-    public TestResult(Long correct, Long incorrect, Long score, String usr_id, Long subjectId)
+    public TestResultNct(Long correct, Long incorrect, String usr_id, Long subjectId)
     {
         this.correct = correct;
         this.incorrect = incorrect;
-        this.score = score;
         this.usr_id = usr_id;
         this.subjectId = subjectId;
     }
@@ -83,16 +79,6 @@ public class TestResult
     public void setIncorrect(Long incorrect)
     {
         this.incorrect = incorrect;
-    }
-
-    public Long getScore()
-    {
-        return score;
-    }
-
-    public void setScore(Long score)
-    {
-        this.score = score;
     }
 
     public Usr getUsr()
@@ -144,7 +130,6 @@ public class TestResult
                 "id=" + id +
                 ", correct=" + correct +
                 ", incorrect=" + incorrect +
-                ", score=" + score +
                 ", usr=" + usr +
                 ", usr_id='" + usr_id + '\'' +
                 ", subject=" + subject +

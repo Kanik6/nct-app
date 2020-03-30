@@ -1,7 +1,7 @@
 package com.ort.ortnct.service;
 
 import com.ort.ortnct.entity.Subject;
-import com.ort.ortnct.entity.TestResult;
+import com.ort.ortnct.entity.TestResultNct;
 import com.ort.ortnct.entity.Usr;
 import com.ort.ortnct.repository.TestResultRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,46 +23,44 @@ public class TestResultService
 
 
     //==========================================CREATE
-    public TestResult createTestResultIndDB(TestResult testResult)
+    public TestResultNct createTestResultIndDB(TestResultNct testResultNct)
     {
-        Subject subject = subjectService.findSubjectById(testResult.getSubjectId());
-        testResult.setSubject(subject);
+        Subject subject = subjectService.findSubjectById(testResultNct.getSubjectId());
+        testResultNct.setSubject(subject);
 
-        Usr usr = usrService.getUsr1(testResult.getUsr_id());
-        testResult.setUsr(usr);
+        Usr usr = usrService.getUsr1(testResultNct.getUsr_id());
+        testResultNct.setUsr(usr);
 
-        TestResult testResult1 = testResultRepository.findByUser_id(testResult.getUsr_id())
+        TestResultNct testResultNct1 = testResultRepository.findByUser_id(testResultNct.getUsr_id())
                 .map(e ->
                 {
-                    e.setScore(testResult.getScore());
-                    e.setCorrect(testResult.getCorrect());
-                    e.setIncorrect(testResult.getIncorrect());
+                    e.setCorrect(testResultNct.getCorrect());
+                    e.setIncorrect(testResultNct.getIncorrect());
                     return testResultRepository.save(e);
                 })
-                .orElseGet(() -> {return testResultRepository.save(testResult);});
-        return testResult1;
+                .orElseGet(() -> {return testResultRepository.save(testResultNct);});
+        return testResultNct1;
     }
 
     //==========================================READ
-    public List<TestResult> getListTestResult()
+    public List<TestResultNct> getListTestResult()
     {
         return testResultRepository.findAll();
     }
 
     //==========================================UPDATE
-    public TestResult updateTestResult(TestResult testResult, Long id)
+    public TestResultNct updateTestResult(TestResultNct testResultNct, Long id)
     {
-        TestResult testResult1 = testResultRepository.findById(id)
+        TestResultNct testResultNct1 = testResultRepository.findById(id)
                 .map(e ->
                 {
-                    e.setScore(testResult.getScore());
-                    e.setCorrect(testResult.getCorrect());
-                    e.setIncorrect(testResult.getIncorrect());
-                    e.setSubject(testResult.getSubject());
+                    e.setCorrect(testResultNct.getCorrect());
+                    e.setIncorrect(testResultNct.getIncorrect());
+                    e.setSubject(testResultNct.getSubject());
                     return testResultRepository.save(e);
                 })
-                .orElseGet(() -> {return testResultRepository.save(testResult);});
-        return testResult1;
+                .orElseGet(() -> {return testResultRepository.save(testResultNct);});
+        return testResultNct1;
     }
 
     //==========================================DELETE

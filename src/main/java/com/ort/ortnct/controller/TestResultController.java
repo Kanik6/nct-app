@@ -1,6 +1,6 @@
 package com.ort.ortnct.controller;
 
-import com.ort.ortnct.entity.TestResult;
+import com.ort.ortnct.entity.TestResultNct;
 import com.ort.ortnct.service.TestResultService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -19,15 +19,15 @@ public class TestResultController
     //=======================================CREATE
     @ApiOperation(value="Create test result", tags = { "Test result" })
     @PostMapping("/testResult")
-    public TestResult createTestResult(@RequestBody TestResult testResult)
+    public TestResultNct createTestResult(@RequestBody TestResultNct testResultNct)
     {
-        return testResultService.createTestResultIndDB(testResult);
+        return testResultService.createTestResultIndDB(testResultNct);
     }
 
     //=======================================GET LIST TEST RESULT
     @ApiOperation(value="Get test result List", tags = { "Test result" })
     @GetMapping("/testResult")
-    public List<TestResult> getListTestResult()
+    public List<TestResultNct> getListTestResult()
     {
         return testResultService.getListTestResult();
     }
@@ -35,9 +35,9 @@ public class TestResultController
     //=======================================UPDATE
     @ApiOperation(value="Update test result", tags = { "Test result" })
     @PutMapping("/testResult")
-    public TestResult updateTestResultById(@RequestBody TestResult testResult,@PathVariable("id") Long id)
+    public TestResultNct updateTestResultById(@RequestBody TestResultNct testResultNct, @PathVariable("id") Long id)
     {
-        return testResultService.updateTestResult(testResult, id);
+        return testResultService.updateTestResult(testResultNct, id);
     }
     //=======================================DELETE
     @ApiOperation(value="Delete test result by id", tags = { "Test result" })

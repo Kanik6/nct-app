@@ -1,14 +1,11 @@
 package com.ort.ortnct.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
-import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.persistence.*;
 import java.util.List;
-import java.util.Set;
 
 @Entity
 @Table(name = "usr")
@@ -35,11 +32,16 @@ public class Usr
     @JsonIgnore
     @OneToOne(mappedBy = "usr")
     @ApiModelProperty(position = 4)
-    private TestResult result;
+    private TestResultNct result;
+
+    @JsonIgnore
+    @OneToOne(mappedBy = "usr")
+    @ApiModelProperty(position = 5)
+    private TestResultOrt resultOrt;
 
     @JsonIgnore
     @OneToMany(mappedBy = "usrr")
-    @ApiModelProperty(position = 5)
+    @ApiModelProperty(position = 6)
     private List<UsrAnswer> usrAnswer;
 
     public Usr()
@@ -94,12 +96,12 @@ public class Usr
         this.grade = grade;
     }
 
-    public TestResult getResult()
+    public TestResultNct getResult()
     {
         return result;
     }
 
-    public void setResult(TestResult result)
+    public void setResult(TestResultNct result)
     {
         this.result = result;
     }
