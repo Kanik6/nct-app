@@ -13,5 +13,5 @@ import java.util.Optional;
 public interface TestResultOrtRepository extends JpaRepository<TestResultOrt, Long>
 {
     @Query(value = "select * from test_result_ort where user_id = :userId", nativeQuery = true)
-    Optional<TestResultNct> findByUser_id(@Param("userId") String userId);
+    Optional<TestResultOrt> findByUser_id(@Param("userId") String userId);
 }

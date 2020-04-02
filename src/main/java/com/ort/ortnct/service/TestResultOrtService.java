@@ -1,8 +1,10 @@
 package com.ort.ortnct.service;
 
+import com.ort.ortnct.entity.Subject;
+import com.ort.ortnct.entity.TestResultNct;
 import com.ort.ortnct.entity.TestResultOrt;
+import com.ort.ortnct.entity.Usr;
 import com.ort.ortnct.repository.TestResultOrtRepository;
-import com.ort.ortnct.repository.TestResultRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -14,11 +16,25 @@ public class TestResultOrtService
     @Autowired
     TestResultOrtRepository testResultOrtRepository;
 
+    @Autowired
+    UsrService usrService;
+
     //============================================CREATE
 
     public TestResultOrt createTestResultOrt(TestResultOrt testResultOrt)
     {
-        return testResultOrtRepository.save(testResultOrt);
+
+        Usr usr = usrService.getUsr1(testResultOrt.getUsrId());
+        testResultOrt.setUsr(usr);
+
+        TestResultOrt testResultOrt1 = testResultOrtRepository.findByUser_id(testResultOrt.getUsrId())
+                .map(e ->
+                {
+                    e.setScore(testResultOrt.getScore());
+                    return testResultOrtRepository.save(e);
+                })
+                .orElseGet(() -> {return testResultOrtRepository.save(testResultOrt);});
+        return testResultOrt1;
     }
     //============================================READ
 
@@ -34,7 +50,7 @@ public class TestResultOrtService
                 .map(e ->
                 {
                     e.setScore(testResultOrt.getScore());
-                    e.setUsr_id(testResultOrt.getUsr_id());
+                    e.setUsrId(testResultOrt.getUsrId());
                     return testResultOrtRepository.save(e);
                 })
                 .orElseGet(() -> {return testResultOrtRepository.save(testResultOrt);});

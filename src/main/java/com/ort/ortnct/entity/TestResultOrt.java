@@ -1,6 +1,7 @@
 package com.ort.ortnct.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 import javax.persistence.*;
 
@@ -17,22 +18,23 @@ public class TestResultOrt
     @Column(name = "score")
     private Long score;
 
-    @JsonIgnore
+
     @OneToOne
     @JoinColumn(name = "user_id")
     private Usr usr;
 
+
     @Transient
-    private String usr_id;
+    private String usrId;
 
     public TestResultOrt()
     {
     }
 
-    public TestResultOrt(Long score, String usr_id)
+    public TestResultOrt(Long score, String usrId)
     {
         this.score = score;
-        this.usr_id = usr_id;
+        this.usrId = usrId;
     }
 
     public Long getId()
@@ -55,19 +57,20 @@ public class TestResultOrt
         return usr;
     }
 
+    @JsonIgnore
     public void setUsr(Usr usr)
     {
         this.usr = usr;
     }
 
-    public String getUsr_id()
+    public String getUsrId()
     {
-        return usr_id;
+        return usrId;
     }
 
-    public void setUsr_id(String usr_id)
+    public void setUsrId(String usrId)
     {
-        this.usr_id = usr_id;
+        this.usrId = usrId;
     }
 
     @Override
@@ -77,7 +80,7 @@ public class TestResultOrt
                 "id=" + id +
                 ", score=" + score +
                 ", usr=" + usr +
-                ", usr_id='" + usr_id + '\'' +
+                ", usrId='" + usrId + '\'' +
                 '}';
     }
 }
