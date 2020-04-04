@@ -17,6 +17,7 @@ public class EduMaterial
     @Column(name = "subject_name")
     private String subjectName;
 
+    @Lob
     @Column(name = "conent")
     private String content;
 
