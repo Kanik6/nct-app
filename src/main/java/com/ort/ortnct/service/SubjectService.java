@@ -33,7 +33,7 @@ public class SubjectService
                 .orElseGet(() -> {return subjectRepository.save(subject);});
         return subject1;
     }
-    //=============================================
+    //=============================================ORT
     public List<Subject> getListSubjectOrtBasic()
     {
         return subjectRepository.findAllOrtFinalBasicSubjects().orElseThrow(() -> new NoSubjectsFoundException("No subjects found!"));
@@ -48,6 +48,49 @@ public class SubjectService
     {
         return subjectRepository.findAllOrtSubjects().orElseThrow(() -> new NoSubjectsFoundException("No subjects found!"));
     }
+    //=============================================NCT
+    public List<Subject> getListSubjectNct5()
+    {
+        return subjectRepository.findAllNctSubjectsGrade5().orElseThrow(() -> new NoSubjectsFoundException("No subjects found!"));
+
+    }
+
+    public List<Subject> getListSubjectNct6()
+    {
+        return subjectRepository.findAllNctSubjectsGrade6().orElseThrow(() -> new NoSubjectsFoundException("No subjects found!"));
+
+    }
+
+    public List<Subject> getListSubjectNct7()
+    {
+        return subjectRepository.findAllNctSubjectsGrade7().orElseThrow(() -> new NoSubjectsFoundException("No subjects found!"));
+
+    }
+
+    public List<Subject> getListSubjectNct8()
+    {
+        return subjectRepository.findAllNctSubjectsGrade8().orElseThrow(() -> new NoSubjectsFoundException("No subjects found!"));
+
+    }
+
+    public List<Subject> getListSubjectNct9()
+    {
+        return subjectRepository.findAllNctSubjectsGrade9().orElseThrow(() -> new NoSubjectsFoundException("No subjects found!"));
+
+    }
+
+    public List<Subject> getListSubjectNct10()
+    {
+        return subjectRepository.findAllNctSubjectsGrade10().orElseThrow(() -> new NoSubjectsFoundException("No subjects found!"));
+
+    }
+
+    public List<Subject> getListSubjectNct11()
+    {
+        return subjectRepository.findAllNctSubjectsGrade11().orElseThrow(() -> new NoSubjectsFoundException("No subjects found!"));
+
+    }
+
     //=============================================
     public Subject findSubjectById(Long id)
     {

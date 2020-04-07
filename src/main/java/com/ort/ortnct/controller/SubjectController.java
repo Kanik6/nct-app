@@ -41,5 +41,55 @@ public class SubjectController
         return subjectService.getListSubjectOrt();
     }
 
+    //==========================================NCT SUBJECT
+    @ApiOperation(value="get nct subject with grade5", tags = { "Subject" })
+    @GetMapping("/subjectListNctSubjects5")
+    public List<Subject> getListNctSubjects5()
+    {
+        return subjectService.getListSubjectNct5();
+    }
+
+    @ApiOperation(value="get nct subject with grade6", tags = { "Subject" })
+    @GetMapping("/subjectListNctSubjects6")
+    public List<Subject> getListNctSubjects6()
+    {
+        return subjectService.getListSubjectNct6();
+    }
+
+    @ApiOperation(value="get nct subject with grade7", tags = { "Subject" })
+    @GetMapping("/subjectListNctSubjects7")
+    public List<Subject> getListNctSubjects7()
+    {
+        return subjectService.getListSubjectNct7();
+    }
+
+    @ApiOperation(value="get nct subject with grade8", tags = { "Subject" })
+    @GetMapping("/subjectListNctSubjects8")
+    public List<Subject> getListNctSubjects8()
+    {
+        return subjectService.getListSubjectNct8();
+    }
+
+    @ApiOperation(value="get nct subject with grade9", tags = { "Subject" })
+    @GetMapping("/subjectListNctSubjects9")
+    public List<Subject> getListNctSubjects9()
+    {
+        return subjectService.getListSubjectNct9();
+    }
+
+    @ApiOperation(value="get nct subject with grade10", tags = { "Subject" })
+    @GetMapping("/subjectListNctSubjects10")
+    public List<Subject> getListNctSubjects10()
+    {
+        return subjectService.getListSubjectNct10();
+    }
+
+    @ApiOperation(value="get nct subject with grade11", tags = { "Subject" })
+    @GetMapping("/subjectListNctSubjects11")
+    public List<Subject> getListNctSubjects11()
+    {
+        return subjectService.getListSubjectNct11();
+    }
+
 
 }

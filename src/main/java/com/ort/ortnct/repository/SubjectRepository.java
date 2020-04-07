@@ -37,10 +37,48 @@ public interface SubjectRepository extends JpaRepository<Subject, Long>
             " where sc.sub_category_name = 'ORT_SUB'", nativeQuery = true)
     Optional<List<Subject>> findAllOrtSubjects();
 
-//    @Query(value = "select * from subjects s" +
-//            " join sub_categories sc on sc.sub_category_id=ccs.sub_category_id" +
-//            " join subject_sub_category ssc on ssc.subject_id=s.subject_id" +
-//            " where sc.sub_category_name = :subCategory", nativeQuery = true)
-//    Optional<List<Subject>> findAllOrtFinalSubjects(@Param("subCategory") String subCategory);
+    @Query(value = "select * from subjects s" +
+            " join subject_sub_category ssc on ssc.subject_id=s.subject_id" +
+            " join sub_categories sc on sc.sub_category_id=ssc.sub_category_id" +
+            " where sc.sub_category_name = 'ORT_GRADE5'", nativeQuery = true)
+    Optional<List<Subject>> findAllNctSubjectsGrade5();
+
+    @Query(value = "select * from subjects s" +
+            " join subject_sub_category ssc on ssc.subject_id=s.subject_id" +
+            " join sub_categories sc on sc.sub_category_id=ssc.sub_category_id" +
+            " where sc.sub_category_name = 'ORT_GRADE6'", nativeQuery = true)
+    Optional<List<Subject>> findAllNctSubjectsGrade6();
+
+    @Query(value = "select * from subjects s" +
+            " join subject_sub_category ssc on ssc.subject_id=s.subject_id" +
+            " join sub_categories sc on sc.sub_category_id=ssc.sub_category_id" +
+            " where sc.sub_category_name = 'ORT_GRADE7'", nativeQuery = true)
+    Optional<List<Subject>> findAllNctSubjectsGrade7();
+
+    @Query(value = "select * from subjects s" +
+            " join subject_sub_category ssc on ssc.subject_id=s.subject_id" +
+            " join sub_categories sc on sc.sub_category_id=ssc.sub_category_id" +
+            " where sc.sub_category_name = 'ORT_GRADE8'", nativeQuery = true)
+    Optional<List<Subject>> findAllNctSubjectsGrade8();
+
+    @Query(value = "select * from subjects s" +
+            " join subject_sub_category ssc on ssc.subject_id=s.subject_id" +
+            " join sub_categories sc on sc.sub_category_id=ssc.sub_category_id" +
+            " where sc.sub_category_name = 'ORT_GRADE9'", nativeQuery = true)
+    Optional<List<Subject>> findAllNctSubjectsGrade9();
+
+    @Query(value = "select * from subjects s" +
+            " join subject_sub_category ssc on ssc.subject_id=s.subject_id" +
+            " join sub_categories sc on sc.sub_category_id=ssc.sub_category_id" +
+            " where sc.sub_category_name = 'ORT_GRADE10'", nativeQuery = true)
+    Optional<List<Subject>> findAllNctSubjectsGrade10();
+
+    @Query(value = "select * from subjects s" +
+            " join subject_sub_category ssc on ssc.subject_id=s.subject_id" +
+            " join sub_categories sc on sc.sub_category_id=ssc.sub_category_id" +
+            " where sc.sub_category_name = 'ORT_GRADE11'", nativeQuery = true)
+    Optional<List<Subject>> findAllNctSubjectsGrade11();
+
+
 
 }
