@@ -88,7 +88,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter
                 .antMatchers(HttpMethod.PUT,"/testResultOrt").permitAll()
                 .antMatchers(HttpMethod.DELETE,"/testResultOrt").permitAll()
                          //NCT SUBJECT
-                .antMatchers(HttpMethod.DELETE,"/subject/nct/subject").permitAll();
+                .antMatchers(HttpMethod.POST,"/subject/nct/subject").permitAll();
 
         List<View> views = viewRepository.findAll();
 
