@@ -28,6 +28,9 @@ public class Answer
     @Column(name = "is_correct")
     private boolean isCorrect;
 
+    @Column(name = "image")
+    private String image;
+
     @JsonIgnore
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinTable(name = "question_answers",
@@ -40,10 +43,11 @@ public class Answer
     {
     }
 
-    public Answer(String answer, boolean isCorrect)
+    public Answer(String answer, boolean isCorrect, String image)
     {
         this.answer = answer;
         this.isCorrect = isCorrect;
+        this.image = image;
     }
 
     public Long getId()
@@ -81,6 +85,16 @@ public class Answer
         this.question = question;
     }
 
+    public String getImage()
+    {
+        return image;
+    }
+
+    public void setImage(String image)
+    {
+        this.image = image;
+    }
+
     @Override
     public String toString()
     {
@@ -88,6 +102,7 @@ public class Answer
                 "id=" + id +
                 ", answer='" + answer + '\'' +
                 ", isCorrect=" + isCorrect +
+                ", image='" + image + '\'' +
                 ", question=" + question +
                 '}';
     }

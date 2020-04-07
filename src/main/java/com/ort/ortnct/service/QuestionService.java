@@ -25,6 +25,7 @@ public class QuestionService
                     e.setExplanation(question.getExplanation());
                     e.setSubject(question.getSubject());
                     e.setQuestion(question.getQuestion());
+                    e.setImage(question.getImage());
                     return questionRepository.save(e);
                 })
                 .

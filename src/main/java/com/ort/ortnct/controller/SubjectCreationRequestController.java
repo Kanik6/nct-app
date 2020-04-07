@@ -45,6 +45,16 @@ public class SubjectCreationRequestController
 
     }
 
+    //ADD SUBJECT TEST ORT
+    @ApiOperation(value="Create NCT subject test", tags = { "Create Request Subject" })
+    @PostMapping("/subject/nct/subject")
+    public Subject subjectCreationRequestNCTSubject(@RequestBody SubjectCreationHelper subjectCreationHelper)
+    {
+        return subjectCreationRequestService.addSubjectTestNCT(subjectCreationHelper);
+
+    }
+
+
 //    Using MODEL MAPPER
 //    @ApiOperation(value="Create ORT final test", tags = { "Subject" })
 //    @PostMapping("/subjectCreationRequestOFMAP")

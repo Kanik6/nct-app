@@ -6,6 +6,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiModel;
+import org.springframework.context.annotation.Configuration;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
@@ -29,6 +30,9 @@ public class Question
     @Column(name = "explanation")
     private String explanation;
 
+    @Column(name = "image")
+    private String image;
+
     @JsonIgnore
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinTable(name = "subject_questions",
@@ -44,10 +48,11 @@ public class Question
     {
     }
 
-    public Question(String question , String explanation)
+    public Question(String question , String explanation, String image)
     {
         this.question = question;
         this.explanation = explanation;
+        this.image = image;
     }
 
     public Long getId()
@@ -95,6 +100,16 @@ public class Question
         this.answer = answer;
     }
 
+    public String getImage()
+    {
+        return image;
+    }
+
+    public void setImage(String image)
+    {
+        this.image = image;
+    }
+
     @Override
     public String toString()
     {
@@ -102,6 +117,7 @@ public class Question
                 "id=" + id +
                 ", question='" + question + '\'' +
                 ", explanation='" + explanation + '\'' +
+                ", image='" + image + '\'' +
                 ", subject=" + subject +
                 ", answer=" + answer +
                 '}';

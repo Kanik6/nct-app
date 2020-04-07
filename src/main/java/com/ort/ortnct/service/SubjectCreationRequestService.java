@@ -163,6 +163,79 @@ public class SubjectCreationRequestService
 
     }
 
+    // adding subject test NCT
+    public Subject addSubjectTestNCT(SubjectCreationHelper subjectCreationHelper)
+    {
+        Locale currentLocale = LocaleContextHolder.getLocale();
+        //--------------------------------WRAPPER_HELPER
+        Subject subject = subjectCreationHelper.getSubject(); // name , subcategory(BASIC , ADDITIONAL)
+        SubCategory subCategory = subjectCreationHelper.getSubCategory();
+        Question question = subjectCreationHelper.getQuestion(); //question
+        List<Answer> answers = subjectCreationHelper.getAnswers(); //list answers
+        //--------------------------------CREATION IN DB-----------------------------------------
+
+        SubCategory subCategory1 = subCategoryService.getSubCategory(subCategory.getSubCategoryName());
+        if((subCategory1.getSubCategoryName().name().equals(SubCategories.NCT_GRADE5.name()))
+                || subCategory.getSubCategoryName().name().equals(SubCategories.NCT_GRADE6.name())
+                || subCategory.getSubCategoryName().name().equals(SubCategories.NCT_GRADE7.name())
+                || subCategory.getSubCategoryName().name().equals(SubCategories.NCT_GRADE8.name())
+                || subCategory.getSubCategoryName().name().equals(SubCategories.NCT_GRADE9.name())
+                || subCategory.getSubCategoryName().name().equals(SubCategories.NCT_GRADE10.name())
+                || subCategory.getSubCategoryName().name().equals(SubCategories.NCT_GRADE11.name())
+          )
+        {
+            subject.setTestType(TestType.SUBJECTTEST);
+
+            subject.setSubCategory(subCategory1);
+
+//         creating subject
+            Subject subject1 = subjectService.findSubjectByNameAndSubcategory(subject);
+            if(subject1 == null)
+            {
+                subject1 = subjectService.createSubjectInDB(subject);
+                // creating test mapping to subject AND creating in db
+                // mapping question to test AND creating in db
+//                arrayQuestion.stream.forEach(e -> e.setSubject(subject1))
+//                List<Question> arrayQuestion = questionService.createArrQuestion(arrayQuestion);
+//                arrayQuestion
+                question.setSubject(subject1);
+                Question question1 = questionService.createQuestionInDB(question);
+                // mapping answers to question AND creating in db
+                answers.stream().forEach(e -> e.setQuestion(question1));
+                List<Answer> answers1 = answerService.createAnswerInDB(answers);
+                //-------------------------updating
+                // updating subject mapping to test
+                subject1.setOneQuestion(question1);
+                Subject subject2 = subjectService.updateSubject(subject1);
+                // updating test mapping test question
+                // updating question mapping question answers
+                question1.setAnswer(answers1);
+
+//                question1.setCorrectAnswer(answers1.stream().filter(e -> e.getCorrect() == true).findFirst().get());
+                questionService.updateQuestionInDB(question1);
+                return subject2;
+
+            }
+            // mapping question to test AND creating in db
+            question.setSubject(subject1);
+            Question question1 = questionService.createQuestionInDB(question);
+            // mapping answers to question AND creating in db
+            answers.stream().forEach(e -> e.setQuestion(question1));
+            List<Answer> answers1 = answerService.createAnswerInDB(answers);
+            //-------------------------updating
+            // updating test mapping test question
+            subject1.setOneQuestion(question1);
+            subjectService.updateSubject(subject1);
+            // updating question mapping question answers
+            question1.setAnswer(answers1);
+//            question1.setCorrectAnswer(answers1.stream().filter(e -> e.getCorrect() == true).findFirst().get());
+            questionService.updateQuestionInDB(question1);
+            return subject1;
+        }
+        else
+            throw new NoSuchSubCategoryException("please specify correct category");
+    }
+
     //========================================MAPPER ORT FINAL
 //    public Subject addFinalTestORTMAPPER(CreateRequestDto createRequestDto)
 //    {
