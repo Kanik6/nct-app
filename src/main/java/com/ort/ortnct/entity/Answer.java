@@ -28,7 +28,7 @@ public class Answer
     @Column(name = "is_correct")
     private boolean isCorrect;
 
-    @Column(name = "image")
+    @Column(name = "image", columnDefinition = "text")
     private String image;
 
     @JsonIgnore

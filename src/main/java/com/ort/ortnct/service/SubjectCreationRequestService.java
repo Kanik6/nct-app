@@ -9,10 +9,13 @@ import com.ort.ortnct.enums.TestType;
 import com.ort.ortnct.exception.NoSuchSubCategoryException;
 import com.ort.ortnct.myHelper.SubjectCreationHelper;
 import com.ort.ortnct.util.ConverterService;
+import com.ort.ortnct.util.ConvertoBase;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.i18n.LocaleContextHolder;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
 import java.util.List;
 import java.util.Locale;
 
@@ -34,8 +37,11 @@ public class SubjectCreationRequestService
     @Autowired
     ConverterService converterService;
 
+    @Autowired
+    ConvertoBase convertoBase;
+
     // adding final test ORT
-    public Subject addFinalTestORT(SubjectCreationHelper subjectCreationHelper)
+    public Subject addFinalTestORT(SubjectCreationHelper subjectCreationHelper, MultipartFile qImage, MultipartFile[] aImage)
     {
         Locale currentLocale = LocaleContextHolder.getLocale();
 
@@ -48,7 +54,15 @@ public class SubjectCreationRequestService
         Subject subject = subjectCreationHelper.getSubject(); // name , subcategory(BASIC , ADDITIONAL)
         SubCategory subCategory = subjectCreationHelper.getSubCategory();
         Question question = subjectCreationHelper.getQuestion(); //question
+        String qBase64Image = convertoBase.convertToBase64(qImage);
+        question.setImage(qBase64Image);
         List<Answer> answers = subjectCreationHelper.getAnswers(); //list answers
+        for(int i = 0; i < aImage.length; i++)
+        {
+            String aBase64Image = convertoBase.convertToBase64(aImage[i]);
+            answers.get(i).setImage(aBase64Image);
+        }
+
         //--------------------------------CREATION IN DB-----------------------------------------
 
         SubCategory subCategory1 = subCategoryService.getSubCategory(subCategory.getSubCategoryName());
@@ -104,13 +118,22 @@ public class SubjectCreationRequestService
     }
 
     // adding subject test ORT
-    public Subject addSubjectTestORT(SubjectCreationHelper subjectCreationHelper)
+    public Subject addSubjectTestORT(SubjectCreationHelper subjectCreationHelper, MultipartFile qImage, MultipartFile[] aImage)
     {
         //--------------------------------WRAPPER_HELPER
         Subject subject = subjectCreationHelper.getSubject(); // name , subcategory(BASIC , ADDITIONAL)
         // SubCategory subCategory = subjectCreationHelper.getSubCategory();
         Question question = subjectCreationHelper.getQuestion(); //question
+        String qBase64Image = convertoBase.convertToBase64(qImage);
+        question.setImage(qBase64Image);
         List<Answer> answers = subjectCreationHelper.getAnswers(); //list answers
+        for(int i = 0; i < aImage.length; i++)
+        {
+            String aBase64Image = convertoBase.convertToBase64(aImage[i]);
+            answers.get(i).setImage(aBase64Image);
+        }
+
+//        question.setImage(qBase64Image);
 
         //--------------------------------CREATION IN DB-----------------------------------------
         SubCategory subCategory = new SubCategory();
@@ -164,14 +187,27 @@ public class SubjectCreationRequestService
     }
 
     // adding subject test NCT
-    public Subject addSubjectTestNCT(SubjectCreationHelper subjectCreationHelper)
+    public Subject addSubjectTestNCT(SubjectCreationHelper subjectCreationHelper, MultipartFile qImage,
+                                     MultipartFile[] aImage) throws IOException
     {
         Locale currentLocale = LocaleContextHolder.getLocale();
+
+
+
         //--------------------------------WRAPPER_HELPER
         Subject subject = subjectCreationHelper.getSubject(); // name , subcategory(BASIC , ADDITIONAL)
         SubCategory subCategory = subjectCreationHelper.getSubCategory();
         Question question = subjectCreationHelper.getQuestion(); //question
+        String qBase64Image = convertoBase.convertToBase64(qImage);
+        question.setImage(qBase64Image);
         List<Answer> answers = subjectCreationHelper.getAnswers(); //list answers
+        for(int i = 0; i < aImage.length; i++)
+        {
+            String aBase64Image = convertoBase.convertToBase64(aImage[i]);
+            answers.get(i).setImage(aBase64Image);
+        }
+//
+//        question.setImage(qBase64Image);
         //--------------------------------CREATION IN DB-----------------------------------------
 
         SubCategory subCategory1 = subCategoryService.getSubCategory(subCategory.getSubCategoryName());

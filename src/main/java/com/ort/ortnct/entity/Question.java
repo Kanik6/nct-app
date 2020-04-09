@@ -30,7 +30,7 @@ public class Question
     @Column(name = "explanation")
     private String explanation;
 
-    @Column(name = "image")
+    @Column(name = "image", columnDefinition = "text")
     private String image;
 
     @JsonIgnore

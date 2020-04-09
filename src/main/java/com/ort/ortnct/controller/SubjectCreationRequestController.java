@@ -11,12 +11,11 @@ import com.ort.ortnct.service.SubjectCreationRequestService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.validation.Valid;
+import java.io.IOException;
 import java.util.List;
 
 @RestController
@@ -31,26 +30,32 @@ public class SubjectCreationRequestController
     //ADD FINAL TEST ORT
     @ApiOperation(value="Create ORT final test", tags = { "Create Request Subject" })
     @PostMapping("/subject/ort/final")
-    public Subject subjectCreationRequestORTFinal(@RequestBody SubjectCreationHelper subjectCreationHelper)
+    public Subject subjectCreationRequestORTFinal(@RequestPart("fullSub") SubjectCreationHelper subjectCreationHelper,
+                                                  @RequestPart MultipartFile qImage,
+                                                  @RequestPart MultipartFile[] aImage)
     {
-       return subjectCreationRequestService.addFinalTestORT(subjectCreationHelper);
+       return subjectCreationRequestService.addFinalTestORT(subjectCreationHelper, qImage, aImage);
     }
 
     //ADD SUBJECT TEST ORT
     @ApiOperation(value="Create ORT subject test", tags = { "Create Request Subject" })
     @PostMapping("/subject/ort/subject")
-    public Subject subjectCreationRequestORTSubject(@RequestBody SubjectCreationHelper subjectCreationHelper)
+    public Subject subjectCreationRequestORTSubject(@RequestPart("fullSub") SubjectCreationHelper subjectCreationHelper,
+                                                    @RequestPart MultipartFile qImage,
+                                                    @RequestPart MultipartFile[] aImage)
     {
-        return subjectCreationRequestService.addSubjectTestORT(subjectCreationHelper);
+        return subjectCreationRequestService.addSubjectTestORT(subjectCreationHelper, qImage, aImage);
 
     }
 
     //ADD SUBJECT TEST ORT
     @ApiOperation(value="Create NCT subject test", tags = { "Create Request Subject" })
     @PostMapping("/subject/nct/subject")
-    public Subject subjectCreationRequestNCTSubject(@RequestBody SubjectCreationHelper subjectCreationHelper)
+    public Subject subjectCreationRequestNCTSubject(@RequestPart("fullSub") SubjectCreationHelper subjectCreationHelper,
+                                                    @RequestPart("qImage") MultipartFile qImage,
+                                                    @RequestPart("aImage") MultipartFile[] aImage) throws IOException
     {
-        return subjectCreationRequestService.addSubjectTestNCT(subjectCreationHelper);
+        return subjectCreationRequestService.addSubjectTestNCT(subjectCreationHelper, qImage, aImage);
 
     }
 
