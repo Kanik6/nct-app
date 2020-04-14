@@ -21,7 +21,7 @@ public class LoginController
     AuthenticationManager authenticationManager;
 
     @PostMapping("/login")
-    public Authentication login(@RequestParam String userName, String password)
+    public Authentication login(@RequestParam String userName,@RequestParam String password)
     {
         UsernamePasswordAuthenticationToken authReq = new UsernamePasswordAuthenticationToken(userName, password);
         Authentication auth = authenticationManager.authenticate(authReq);

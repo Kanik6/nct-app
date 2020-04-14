@@ -96,7 +96,9 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter
                 .antMatchers(HttpMethod.GET,"/subjectListNctSubjects8").permitAll()
                 .antMatchers(HttpMethod.GET,"/subjectListNctSubjects9").permitAll()
                 .antMatchers(HttpMethod.GET,"/subjectListNctSubjects10").permitAll()
-                .antMatchers(HttpMethod.POST,"/testQuestion").permitAll();
+                .antMatchers(HttpMethod.POST,"/testQuestion").permitAll()
+                .antMatchers(HttpMethod.POST,"/login").permitAll();
+
 
 
 

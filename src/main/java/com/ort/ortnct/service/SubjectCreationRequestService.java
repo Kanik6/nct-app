@@ -43,13 +43,6 @@ public class SubjectCreationRequestService
     // adding final test ORT
     public Subject addFinalTestORT(SubjectCreationHelper subjectCreationHelper, MultipartFile qImage, MultipartFile[] aImage)
     {
-        Locale currentLocale = LocaleContextHolder.getLocale();
-
-        System.out.println(currentLocale.getDisplayLanguage());
-        System.out.println(currentLocale.getDisplayCountry());
-
-        System.out.println(currentLocale.getLanguage());
-        System.out.println(currentLocale.getCountry());
         //--------------------------------WRAPPER_HELPER
         Subject subject = subjectCreationHelper.getSubject(); // name , subcategory(BASIC , ADDITIONAL)
         SubCategory subCategory = subjectCreationHelper.getSubCategory();
@@ -190,10 +183,6 @@ public class SubjectCreationRequestService
     public Subject addSubjectTestNCT(SubjectCreationHelper subjectCreationHelper, MultipartFile qImage,
                                      MultipartFile[] aImage) throws IOException
     {
-        Locale currentLocale = LocaleContextHolder.getLocale();
-
-
-
         //--------------------------------WRAPPER_HELPER
         Subject subject = subjectCreationHelper.getSubject(); // name , subcategory(BASIC , ADDITIONAL)
         SubCategory subCategory = subjectCreationHelper.getSubCategory();
