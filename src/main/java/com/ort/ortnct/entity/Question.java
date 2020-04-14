@@ -6,6 +6,8 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiModel;
+import lombok.Getter;
+import lombok.Setter;
 import org.springframework.context.annotation.Configuration;
 
 import javax.persistence.*;
@@ -21,20 +23,29 @@ public class Question
     @Column(name = "question_id")
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Getter
     private Long id;
 
     @Column(name = "question")
     @NotBlank(message = "Question is mandatory!")
+    @Getter
+    @Setter
     private String question;
 
     @Column(name = "explanation")
+    @Getter
+    @Setter
     private String explanation;
 
     @Column(name = "image", columnDefinition = "text")
+    @Getter
+    @Setter
     private String image;
 
     @JsonIgnore
     @ManyToOne(cascade = CascadeType.ALL)
+    @Getter
+    @Setter
     @JoinTable(name = "subject_questions",
             inverseJoinColumns = @JoinColumn(name = "subject_id"),
             joinColumns = @JoinColumn(name = "question_id"))
@@ -42,84 +53,7 @@ public class Question
 
 //    @JsonIgnore
     @OneToMany(mappedBy = "question", cascade = CascadeType.ALL)
+    @Getter
+    @Setter
     private List<Answer> answer;
-
-    public Question()
-    {
-    }
-
-    public Question(String question , String explanation, String image)
-    {
-        this.question = question;
-        this.explanation = explanation;
-        this.image = image;
-    }
-
-    public Long getId()
-    {
-        return id;
-    }
-
-    public String getQuestion()
-    {
-        return question;
-    }
-
-    public void setQuestion(String question)
-    {
-        this.question = question;
-    }
-
-    public String getExplanation()
-    {
-        return explanation;
-    }
-
-    public void setExplanation(String explanation)
-    {
-        this.explanation = explanation;
-    }
-
-    public Subject getSubject()
-    {
-        return subject;
-    }
-
-    public void setSubject(Subject subject)
-    {
-        this.subject = subject;
-    }
-
-    public List<Answer> getAnswer()
-    {
-        return answer;
-    }
-
-    public void setAnswer(List<Answer> answer)
-    {
-        this.answer = answer;
-    }
-
-    public String getImage()
-    {
-        return image;
-    }
-
-    public void setImage(String image)
-    {
-        this.image = image;
-    }
-
-    @Override
-    public String toString()
-    {
-        return "Question{" +
-                "id=" + id +
-                ", question='" + question + '\'' +
-                ", explanation='" + explanation + '\'' +
-                ", image='" + image + '\'' +
-                ", subject=" + subject +
-                ", answer=" + answer +
-                '}';
-    }
 }

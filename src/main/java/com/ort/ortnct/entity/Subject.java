@@ -2,23 +2,22 @@ package com.ort.ortnct.entity;
 
 
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
-import com.ort.ortnct.enums.TestType;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
-import org.springframework.format.annotation.DateTimeFormat;
+import lombok.Getter;
+import lombok.Setter;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
-import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.Set;
 
 @Entity
 @Table(name = "subjects")
 @ApiModel(value = "subject model")
 @JsonIdentityInfo(generator= ObjectIdGenerators.PropertyGenerator.class, property="id")
+@Getter
+@Setter
 public class Subject
 {
     @Column(name = "subject_id")
@@ -32,136 +31,18 @@ public class Subject
     @ApiModelProperty(position = 1)
     private String name;
 
-    @Column(name = "instruction")
-    @ApiModelProperty(position = 2)
-    private String instruction;
+    @ManyToOne
+    private Set<Language> lang;
 
-    @OneToMany(mappedBy = "subject")
-    @ApiModelProperty(position = 5)
-    private List<Question> question = new ArrayList<>();
+    @OneToMany
+    private Set<Grade> grade;
 
-    @JsonIgnore
-    @OneToMany(mappedBy = "subject")
-    private List<TestResultNct> testResultNct;
 
-    @Column(name = "creation_date")
-    @DateTimeFormat(style = "yyyy-MM-dd")
-    @ApiModelProperty(position = 3)
-    private LocalDate creationDate = LocalDate.now();
 
-    @ManyToOne(cascade = CascadeType.ALL)
-    @JoinTable(name = "subject_sub_category",
-            joinColumns = @JoinColumn(name = "subject_id"),
-            inverseJoinColumns = @JoinColumn(name = "sub_category_id"))
-    @ApiModelProperty(position = 2)
-    @JsonIgnore
-    private SubCategory subCategory;
 
-    @Column(name = "test_type")
-    @Enumerated(EnumType.STRING)
-    @ApiModelProperty(position = 4)
-    @JsonIgnore
-    private TestType testType;
+//    @Column(name = "creation_date")
+//    @DateTimeFormat(style = "yyyy-MM-dd")
+//    @ApiModelProperty(position = 3)
+//    private LocalDate creationDate = LocalDate.now();
 
-    public Subject()
-    {
-    }
-
-    public Subject(String name, SubCategory subCategory, String instruction)
-    {
-        this.name = name;
-        this.subCategory = subCategory;
-        this.instruction = instruction;
-    }
-
-    public Long getId()
-    {
-        return id;
-    }
-
-    public String getName()
-    {
-        return name;
-    }
-
-    public void setName(String name)
-    {
-        this.name = name;
-    }
-
-    public SubCategory getSubCategory()
-    {
-        return subCategory;
-    }
-
-    public void setSubCategory(SubCategory subCategory)
-    {
-        this.subCategory = subCategory;
-    }
-
-    public String getInstruction()
-    {
-        return instruction;
-    }
-
-    public void setInstruction(String instruction)
-    {
-        this.instruction = instruction;
-    }
-
-    public LocalDate getCreationDate()
-    {
-        return creationDate;
-    }
-
-    public List<Question> getQuestion()
-    {
-        return question;
-    }
-
-    public void setQuestion(List<Question> question)
-    {
-        this.question = question;
-    }
-
-    @JsonIgnore
-    public void setOneQuestion(Question question)
-    {
-        this.question.add(question);
-    }
-
-    public List<TestResultNct> getTestResultNct()
-    {
-        return testResultNct;
-    }
-
-    public void setTestResultNct(List<TestResultNct> testResultNct)
-    {
-        this.testResultNct = testResultNct;
-    }
-
-    public TestType getTestType()
-    {
-        return testType;
-    }
-
-    public void setTestType(TestType testType)
-    {
-        this.testType = testType;
-    }
-
-    @Override
-    public String toString()
-    {
-        return "Subject{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                ", instruction='" + instruction + '\'' +
-                ", creationDate=" + creationDate +
-                ", question=" + question +
-                ", testResult=" + testResultNct +
-                ", subCategory=" + subCategory +
-                ", testType=" + testType +
-                '}';
-    }
 }

@@ -45,6 +45,11 @@
 			<artifactId>postgresql</artifactId>
 			<scope>runtime</scope>
 		</dependency>
+		<!-- Lombok-->
+		<dependency>
+			<groupId>org.projectlombok</groupId>
+			<artifactId>lombok</artifactId>
+		</dependency>
 		<!-- SECURITY -->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>

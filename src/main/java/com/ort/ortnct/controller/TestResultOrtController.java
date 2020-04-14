@@ -1,7 +1,5 @@
 package com.ort.ortnct.controller;
 
-import com.ort.ortnct.entity.TestResultOrt;
-import com.ort.ortnct.service.TestResultOrtService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;

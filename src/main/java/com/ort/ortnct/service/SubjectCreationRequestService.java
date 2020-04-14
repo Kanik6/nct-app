@@ -2,22 +2,17 @@ package com.ort.ortnct.service;
 
 import com.ort.ortnct.entity.Answer;
 import com.ort.ortnct.entity.Question;
-import com.ort.ortnct.entity.SubCategory;
 import com.ort.ortnct.entity.Subject;
-import com.ort.ortnct.enums.SubCategories;
-import com.ort.ortnct.enums.TestType;
 import com.ort.ortnct.exception.NoSuchSubCategoryException;
 import com.ort.ortnct.myHelper.SubjectCreationHelper;
 import com.ort.ortnct.util.ConverterService;
 import com.ort.ortnct.util.ConvertoBase;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.i18n.LocaleContextHolder;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
 import java.util.List;
-import java.util.Locale;
 
 @Service
 public class SubjectCreationRequestService

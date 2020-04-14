@@ -1,7 +1,6 @@
 package com.ort.ortnct.controller;
 
 import com.ort.ortnct.entity.EduMaterial;
-import com.ort.ortnct.service.EduMaterialService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
